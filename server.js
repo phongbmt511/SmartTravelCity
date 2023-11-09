@@ -1,0 +1,50 @@
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+const routerUser = require('./Router/User');
+
+const app = express();
+const bodyParser = require('body-parser');
+
+const url = "mongodb+srv://project:project@cluster0.fd17rr3.mongodb.net/dbtravel";
+
+async function connect() {
+    try {
+        await mongoose.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("Connected to mongoose");
+    } catch (error) {
+        console.error(error);
+    }
+}
+connect();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+// parser application/json
+app.use(bodyParser.json());
+app.use('/Public', express.static(path.join(__dirname, '/Public')));
+app.use('/Views', express.static(path.join(__dirname, '/Views')));
+app.set("view engine", 'ejs');
+app.set("views", "./Views")
+
+app.get('/', (req, res) => {
+    res.render('Login', req.query);
+});
+
+app.get('/home', (req, res) => {
+    res.render('Home', req.query);
+});
+app.get('/blog', (req, res) => {
+    try {
+        res.render('Blog', req.query);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.use('/api/account', routerUser);
+app.listen(3000, () => {
+    console.log("Server started on port 3000");
+});

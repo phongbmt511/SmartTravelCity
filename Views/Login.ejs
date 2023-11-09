@@ -1,0 +1,74 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAVEL CITY</title>
+    <link rel="stylesheet" href="/Public/Style/login.css" />
+  </head>
+  <body>
+    <div class="login">
+      <div class="login__container">
+        <h1>LOGIN</h1>
+        <form id="loginForm">
+          <h5 for="username">Username</h5>
+          <input
+            type="text"
+            class="input-login-username"
+            id="username"
+            name="username"
+            required
+          />
+          <h5 for="password">Password</h5>
+          <input
+            type="password"
+            class="input-login-password"
+            id="password"
+            name="password"
+            required
+          />
+          <br />
+          <button type="button" class="login__signInButton" id="loginButton">
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
+    <script>
+      // Add a click event listener to the login button
+      document
+        .getElementById("loginButton")
+        .addEventListener("click", function () {
+          // Get the username and password from the input fields
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          // Send a POST request to the server for login validation
+          fetch("/api/account/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+          })
+            .then((response) => {
+              if (response.status === 200) {
+                // Redirect to the home page if login is successful
+                window.location.href = "/home";
+              } else if (response.status === 401) {
+                // Handle incorrect credentials
+                alert("Login failed. Please check your credentials.");
+              } else {
+                // Handle other errors
+                alert("An error occurred. Please try again later.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+              // Handle network errors
+              alert("Network error. Please try again later.");
+            });
+        });
+    </script>
+  </body>
+</html>
