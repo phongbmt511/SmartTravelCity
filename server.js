@@ -44,6 +44,14 @@ app.get('/blog', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+app.get('/tours', (req, res) => {
+    try {
+        res.render('Tours', req.query);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 app.use('/api/account', routerUser);
 app.listen(3000, () => {
     console.log("Server started on port 3000");

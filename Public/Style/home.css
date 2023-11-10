@@ -72,15 +72,17 @@ nav {
   align-items: center;
   gap: 2rem;
 }
-
-.link {
+.nav__links a {
+  text-decoration: none;
+  color: white;
+}
+.nav__links a {
   color: var(--extra-light);
   text-transform: uppercase;
   cursor: pointer;
   transition: 0.3s;
 }
-
-.link:hover {
+.nav__links a:hover {
   color: var(--primary-color);
 }
 
