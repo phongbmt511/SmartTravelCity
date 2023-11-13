@@ -78,7 +78,7 @@ nav {
 }
 .nav__links a {
   color: var(--extra-light);
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   cursor: pointer;
   transition: 0.3s;
 }

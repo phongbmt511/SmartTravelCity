@@ -1,5 +1,4 @@
 * {
-  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -130,8 +129,8 @@ nav {
   margin: 20px;
 }
 .category {
+  margin: 5px;
   font-size: 0.8rem;
-  font-weight: 500;
   color: gray;
 }
 

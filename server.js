@@ -1,7 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const routerUser = require('./Router/User');
+const routerUser = require('./Router/accountRouter');
+const newLocal = './Router/tourRouter';
+const routerTour = require(newLocal);
+const routerBlog = require('./Router/blogRouter');
+
 
 const app = express();
 const bodyParser = require('body-parser');
@@ -52,7 +56,10 @@ app.get('/tours', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+app.use('/api', routerTour);
 app.use('/api/account', routerUser);
+app.use('/api', routerBlog)
 app.listen(3000, () => {
     console.log("Server started on port 3000");
 });
