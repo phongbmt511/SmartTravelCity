@@ -9,7 +9,7 @@
   <body>
     <div class="login">
       <div class="login__container">
-        <h1>LOGIN</h1>
+        <h1>Login</h1>
         <form id="loginForm">
           <h5 for="username">Username</h5>
           <input
@@ -32,12 +32,13 @@
             Login
           </button>
         </form>
+        <a href="/register" class="login__registerButton">Go to Register</a>
       </div>
     </div>
     <script>
       // Function to handle login
       function handleLogin() {
-        // Get the username and password from the input fields
+        // Get the username and password from the input
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
@@ -51,20 +52,21 @@
         })
           .then((response) => {
             if (response.status === 200) {
+              alert("Dang nhap thanh cong");
               // Redirect to the home page if login is successful
               window.location.href = "/home";
             } else if (response.status === 401) {
               // Handle incorrect credentials
-              alert("Login failed. Please check your credentials.");
+              alert("Login failed");
             } else {
               // Handle other errors
-              alert("An error occurred. Please try again later.");
+              alert("Error");
             }
           })
           .catch((error) => {
             console.error("Error:", error);
             // Handle network errors
-            alert("Network error. Please try again later.");
+            alert("Network error");
           });
       }
 

@@ -1,32 +1,39 @@
 const express = require('express');
 const AccountModel = require('../Model/Account');
 const router = express.Router();
+// Xử lý yêu cầu GET để hiển thị trang contact
+router.get('/contact', (req, res, next) => {
+    res.render('Contact');
+});
+//Xử lý yêu cầu GET để hiển thị trang đăng ký
+router.get('/register', (req, res, next) => {
+    res.render('Register');
+});
+router.post('/register', (req, res, next) => {
+    const username = req.body.username;
+    const password = req.body.password;
+    AccountModel.findOne({
+        username: username
+    })
+        .then(data => {
+            if (data) {
+                res.json('user nay da ton tai')
+            } else {
+                return AccountModel.create({
+                    username: username,
+                    password: password
+                })
+            }
+        })
+        .then(data => {
+            res.json('Tạo tài khoản thành công');
+        })
+        .catch(err => {
+            console.error(err); // Log the error for debugging
+            res.status(500).json('Tạo tài khoản thất bại');
+        });
+});
 
-
-// router.post('/register', (req, res, next) => {
-//     const username = req.body.username;
-//     const password = req.body.password;
-//     AccountModel.findOne({
-//         username: username
-//     })
-//         .then(data => {
-//             if (data) {
-//                 res.json('user nay da ton tai')
-//             } else {
-//                 return AccountModel.create({
-//                     username: username,
-//                     password: password
-//                 })
-//             }
-//         })
-//         .then(data => {
-//             res.json('Tạo tài khoản thành công');
-//         })
-//         .catch(err => {
-//             console.error(err); // Log the error for debugging
-//             res.status(500).json('Tạo tài khoản thất bại');
-//         });
-// });
 
 router.post('/login', (req, res, next) => {
     const username = req.body.username
@@ -38,7 +45,7 @@ router.post('/login', (req, res, next) => {
 
         .then(data => {
             if (data) {
-                res.json('dang nhap thanh cong')
+                res.json('login thanh cong')
             } else {
                 res.status(400).json('account ko dung')
             }
@@ -49,7 +56,7 @@ router.post('/login', (req, res, next) => {
 })
 
 // lay du lieu tu db
-router.get('/', (req, res, next) => {
+router.get('/login', (req, res, next) => {
     AccountModel.find({})
         .then(data => {
             res.json(data)
@@ -60,7 +67,7 @@ router.get('/', (req, res, next) => {
         })
 })
 // them moi du lieu vao db
-router.post('/', (req, res, next) => {
+router.post('/login', (req, res, next) => {
     const username = req.body.username;
     const password = req.body.password;
     AccountModel.create({
@@ -68,14 +75,14 @@ router.post('/', (req, res, next) => {
         password: password
     })
         .then(data => {
-            res.json('them account thanh cong')
+            res.json('create account thanh cong')
         })
         .catch(err => {
             res.status(500).json('loi server')
         })
 })
 // update du lieu trong db
-router.put('/:id', (req, res, next) => {
+router.put('/login/:id', (req, res, next) => {
     const id = req.params.id
     const newUsername = req.body.newPassword
     const newPassword = req.body.newPassword
@@ -91,13 +98,13 @@ router.put('/:id', (req, res, next) => {
         })
 })
 // delete du lieu trong db
-router.delete('/:id', (req, res, next) => {
+router.delete('/login/:id', (req, res, next) => {
     const id = req.params.id
     AccountModel.deleteOne({
         _id: id
     })
         .then(data => {
-            res.json('xoa thanh cong')
+            res.json('delete thanh cong')
         })
         .catch(err => {
             res.status(500).json('loi server')

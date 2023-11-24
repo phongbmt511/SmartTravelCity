@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/Public/Style/blog.css" />
   </head>
   <body>
+    <!-- page header -->
     <nav>
       <div class="nav__logo container"><a href="/home">Travel</a></div>
     </nav>
@@ -23,30 +24,7 @@
         <span class="home-subtitle">Your source of great content</span>
       </div>
     </section>
-
-    <!-- <section class="about container" id="about">
-      <div class="contentBx">
-        <h2 class="titleText">Catch up with the trending topics</h2>
-        <p class="title-text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum eos
-          consequuntur voluptate dolorum totam provident ducimus cupiditate
-          dolore doloribus repellat. Saepe ad fugit similique quis quam. Odio
-          suscipit incidunt distinctio.
-          <br />Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed
-          blanditiis libero pariatur ipsum suscipit voluptates aut, repellendus
-          quos dolor autem .
-        </p>
-        <a href="#" class="btn2">Read more</a>
-      </div>
-      <div class="imgBx">
-        <img
-          src="https://vcdn1-dulich.vnecdn.net/2022/05/27/du-lich-viet-nam-1653637298-1653641946.jpg?w=1200&h=0&q=100&dpr=1&fit=crop&s=AaYGWpDjwwuTJUlDTdUfEA"
-          alt=""
-          class="fitBg"
-        />
-      </div>
-    </section> -->
-
+    <!-- page body -->
     <div class="post-filter container">
       <span class="filter-item active-filter" data-filter="all">All</span>
       <span class="filter-item" data-filter="nature">Nature</span>
@@ -81,6 +59,7 @@
         </div>
       </div> -->
     </div>
+    <!-- page footer -->
     <footer class="footer">
       <div class="cont">
         <div class="row">
@@ -126,13 +105,13 @@
       </div>
     </footer>
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"
-      integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA=="
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
-
     <script>
+      // render giao diện
       $(document).ready(function () {
         // Gọi API để lấy dữ liệu từ MongoDB
         $.ajax({
@@ -167,6 +146,7 @@
         });
 
         // Xử lý sự kiện khi người dùng click vào một filter-item
+
         $(".filter-item").click(function () {
           const filterValue = $(this).attr("data-filter").toLowerCase();
 

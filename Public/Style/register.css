@@ -8,7 +8,7 @@ body {
   overflow: hidden;
 }
 
-.login {
+.signup {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,11 +16,11 @@ body {
   width: 100%;
 }
 
-.login__container {
+.signup__container {
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding: 40px;
+  padding: 30px;
   border-radius: 10px;
   background-color: #fff;
   border: 1px solid rgb(0, 0, 0, 0.1);
@@ -28,14 +28,14 @@ body {
     rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
-.login .title {
+.signup .title {
   color: rgb(30, 30, 30);
   font-size: 20px;
   font-weight: bold;
   margin: 20px auto 10px;
 }
 
-.login input {
+.signup input {
   width: 300px;
   border-radius: 4px;
   margin: 10px auto;
@@ -47,22 +47,22 @@ body {
   color: rgb(30, 30, 30);
   transition: 0.3s;
 }
-.login input::placeholder {
+.signup input::placeholder {
   color: rgb(200, 200, 200);
 }
-.login input:hover {
+.signup input:hover {
   background-color: #f1eff1;
 }
-.login input:focus {
+.signup input:focus {
   background-color: #fff;
   border: 1px solid rgb(87, 126, 219);
   box-shadow: 0 0 4px 2px rgb(50, 50, 50, 0.1);
 }
-.login input:valid {
+.signup input:valid {
   border: 1px solid rgb(220, 220, 220);
 }
 
-.login__signInButton {
+.signup__signInButton {
   border-radius: 4px;
   background-color: rgb(87, 126, 219);
   height: 45px;
@@ -78,7 +78,7 @@ body {
   margin-left: 30px;
 }
 
-.login a {
+.signup a {
   text-decoration: none;
   color: rgb(160, 160, 160);
   font-size: 15px;

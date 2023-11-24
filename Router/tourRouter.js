@@ -2,7 +2,7 @@ const express = require('express');
 const Tour = require('../Model/Tour'); // Correct import for the Tour model
 const router = express.Router();
 
-// Route to get all tours
+// lấy tất cả tour
 router.get('/tours', async (req, res) => {
     try {
         const tours = await Tour.find();
@@ -12,7 +12,7 @@ router.get('/tours', async (req, res) => {
     }
 });
 
-// Route to get a specific tour
+// lấy tour theo id
 router.get('/tours/:id', async (req, res) => {
     try {
         const tour = await Tour.findById(req.params.id);
@@ -22,7 +22,7 @@ router.get('/tours/:id', async (req, res) => {
     }
 });
 
-// Route to create a new tour
+// create tour 
 router.post('/tours', async (req, res) => {
     const tour = new Tour({
         name: req.body.name,
@@ -39,7 +39,7 @@ router.post('/tours', async (req, res) => {
     }
 });
 
-// Route to update a tour
+// update tour 
 router.patch('/tours/:id', async (req, res) => {
     try {
         const tour = await Tour.findById(req.params.id);
@@ -63,7 +63,7 @@ router.patch('/tours/:id', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
-// Route to delete a tour
+// delete tour
 router.delete('/tours/:id', async (req, res) => {
     try {
         const tour = await Tour.findById(req.params.id);

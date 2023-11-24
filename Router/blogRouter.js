@@ -90,5 +90,5 @@ router.delete('/blogs/:id', getBlog, async (req, res) => {
     }
 });
 
-// Xuất router để sử dụng trong ứng dụng của bạn
+
 module.exports = router;

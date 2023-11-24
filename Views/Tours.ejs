@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="/Public/Style/tours.css" />
   </head>
   <body>
+    <!-- Page header -->
     <nav>
       <div class="nav__logo container"><a href="/home">Travel</a></div>
     </nav>
@@ -22,6 +23,7 @@
         <span class="home-subtitle">Your source of great content</span>
       </div>
     </section>
+    <!-- Page Body -->
     <h2 class="h_title">Your packages</h2>
     <div class="post container">
       <!-- Post 1 -->
@@ -39,7 +41,7 @@
         <div class="card_btn">book now</div>
       </div> -->
     </div>
-
+    <!-- Page Footer -->
     <footer class="footer">
       <div class="cont">
         <div class="row">
@@ -84,11 +86,16 @@
         <p>Welcome to Travel</p>
       </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
     <script>
       $(document).ready(function () {
         $.ajax({
-          url: "/api/tours", // Assuming this is the correct endpoint for your tours
+          url: "/api/tours",
           method: "GET",
           success: function (data) {
             // Iterate over the tour data and display it on the page
@@ -115,7 +122,7 @@
                 .text("book now")
                 .click(function () {
                   window.open(
-                    `https://www.google.com/maps/search/?api=1&query=${tour.place}`
+                    `https://api.openweathermap.org/data/2.5/weather?q=${tour.place}&appid=67ffce63d19a94c476e09e1e427d491e`
                   );
                 });
 
@@ -128,60 +135,6 @@
           },
         });
       });
-      // document.addEventListener("DOMContentLoaded", async function () {
-      //   try {
-      //     // Gọi API để lấy danh sách các tour từ server
-      //     const response = await fetch("/api/tours");
-      //     const tours = await response.json();
-
-      //     // Lặp qua từng tour và hiển thị thông tin trên trang
-      //     const postContainer = document.querySelector(".post");
-      //     tours.forEach((tour) => {
-      //       const postBox = document.createElement("div");
-      //       postBox.className = "post-box";
-
-      //       const img = document.createElement("img");
-      //       img.src = tour.image;
-      //       img.alt = "";
-      //       img.className = "post-img";
-
-      //       const category = document.createElement("h2");
-      //       category.className = "category";
-      //       category.innerHTML = `<i class="bx bxs-map bx-xs">${tour.place}</i>`;
-
-      //       const title = document.createElement("a");
-      //       title.href = "#";
-      //       title.className = "post-title";
-      //       title.textContent = tour.name;
-
-      //       const description = document.createElement("p");
-      //       description.className = "post-description";
-      //       description.textContent = tour.title;
-
-      //       const cardBtn = document.createElement("div");
-      //       cardBtn.className = "card_btn";
-      //       cardBtn.textContent = "book now";
-
-      //       // Add click event listener to the "Map" button
-      //       cardBtn.addEventListener("click", function () {
-      //         // Open Google Maps with the destination coordinates
-      //         window.open(
-      //           `https://www.google.com/maps/search/?api=1&query=${tour.place}`
-      //         );
-      //       });
-
-      //       postBox.appendChild(img);
-      //       postBox.appendChild(category);
-      //       postBox.appendChild(title);
-      //       postBox.appendChild(description);
-      //       postBox.appendChild(cardBtn);
-
-      //       postContainer.appendChild(postBox);
-      //     });
-      //   } catch (error) {
-      //     console.error("Error fetching data:", error.message);
-      //   }
-      // });
     </script>
   </body>
 </html>
