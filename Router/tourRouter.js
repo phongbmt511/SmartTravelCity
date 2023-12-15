@@ -21,6 +21,21 @@ router.get('/tours/:id', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+// router.get('/tours/:id', async (req, res) => {
+//     try {
+//         const tour = await Tour.findById(req.params.id);
+//         if (!tour) {
+//             return res.status(404).json({ message: 'Tour not found' });
+//         }
+//         res.json(tour);
+
+//         // res.render('DetailTour', req.query);
+
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).send('Internal Server Error');
+//     }
+// });
 
 // create tour 
 router.post('/tours', async (req, res) => {

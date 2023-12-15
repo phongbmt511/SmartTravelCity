@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TRAVEL CITY</title>
     <link rel="stylesheet" href="/Public/Style/login.css" />
+    <link rel="shortcut icon" type="image/png" href="/Public/Image/icon.png" />
   </head>
   <body>
     <div class="login">
@@ -52,7 +53,7 @@
         })
           .then((response) => {
             if (response.status === 200) {
-              alert("Dang nhap thanh cong");
+              alert("Login successfully");
               // Redirect to the home page if login is successful
               window.location.href = "/home";
             } else if (response.status === 401) {

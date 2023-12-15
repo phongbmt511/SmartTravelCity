@@ -11,6 +11,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/Public/Style/tours.css" />
+    <link rel="shortcut icon" type="image/png" href="/Public/Image/icon.png" />
   </head>
   <body>
     <!-- Page header -->
@@ -20,11 +21,11 @@
     <section class="home" id="home">
       <div class="home-text container">
         <h2 class="home-title">Travel Tours</h2>
-        <span class="home-subtitle">Your source of great content</span>
+        <span class="home-subtitle">Endless source of travel inspiration</span>
       </div>
     </section>
     <!-- Page Body -->
-    <h2 class="h_title">Your packages</h2>
+    <h2 class="h_title" style="color: #669ccb">Explore The Wonders</h2>
     <div class="post container">
       <!-- Post 1 -->
       <!-- <div class="post-box">
@@ -109,7 +110,7 @@
                 .attr("alt", "");
               const category = $("<h2>")
                 .addClass("category")
-                .html(`<i class="bx bxs-map bx-xs">${tour.place}</i>`);
+                .html(`<i class="bx bxs-map bx-xs">${tour.location}</i>`);
               const title = $("<a>")
                 .attr("href", "#")
                 .addClass("post-title")
@@ -119,11 +120,10 @@
                 .text(tour.title);
               const cardBtn = $("<div>")
                 .addClass("card_btn")
-                .text("book now")
+                .text("Read More")
                 .click(function () {
-                  window.open(
-                    `https://api.openweathermap.org/data/2.5/weather?q=${tour.place}&appid=67ffce63d19a94c476e09e1e427d491e`
-                  );
+                  // window.location.href = `/api/tours/${tour._id}`;
+                  window.location.href = `/detail?id=${tour._id}`;
                 });
 
               postBox.append(img, category, title, description, cardBtn);

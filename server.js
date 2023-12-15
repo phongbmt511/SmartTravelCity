@@ -72,6 +72,23 @@ app.get('/contact', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+app.get('/detail', (req, res) => {
+    try {
+        const tourId = req.query.id;
+        res.render('DetailTour', { tourId });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.get('/services', (req, res) => {
+    try {
+        res.render('Services', req.query);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 app.use('/api', routerTour);
 app.use('/api/account', routerUser);
 app.use('/api', routerBlog)

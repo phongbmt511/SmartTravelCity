@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TRAVEL CITY</title>
+    <link rel="stylesheet" href="/Public/Style/detailTour.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" type="image/png" href="/Public/Image/icon.png" />
+  </head>
+
+  <body>
+    <section class="post-header">
+      <div class="header-content post-container">
+        <a href="/tours" class="backhome">Back To Tours</a>
+        <h3 class="header-title" id="tourName"></h3>
+        <img
+          src="https://tourismdanang.com/wp-content/uploads/2020/04/62553457_441495056671311_2106223215742287872_o.jpg"
+          alt="image"
+          class="header-img"
+          id="tourImage"
+        />
+      </div>
+    </section>
+    <section class="post-content post-container">
+      <h4 class="sub-heading" id="tourTitle"></h4>
+      <p class="post-text" id="tourDescription">
+        <!-- Content will be dynamically inserted here -->
+      </p>
+    </section>
+    <!-- page footer -->
+    <footer class="footer">
+      <div class="cont">
+        <div class="row">
+          <div>
+            <h2>Smart City Travel</h2>
+            <p>
+              Travel makes one modest. You see what a tiny place you occupy in
+              the world.
+            </p>
+          </div>
+          <div>
+            <h4>Menu</h4>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Tours</a></li>
+              <li><a href="#">Services</a></li>
+              <li><a href="#">Contacts</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Details</h4>
+            <ul>
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Place : HCM</a></li>
+              <li><a href="#">Phone : 0123456789</a></li>
+              <li><a href="#">Gmail : hh@gmail.com</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contacts</h4>
+            <div class="socialButton">
+              <a><i class="bx bxl-instagram-alt"></i></a>
+              <a><i class="bx bxl-facebook"></i></a>
+              <a><i class="bx bxl-twitter"></i></a>
+              <a><i class="bx bxl-discord-alt"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>Welcome to Travel</p>
+      </div>
+    </footer>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        // Lấy ID từ query parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const tourId = urlParams.get("id");
+
+        // Gọi API để lấy thông tin chi tiết của địa điểm du lịch dựa trên ID
+        $.ajax({
+          url: `/api/tours/${tourId}`,
+          method: "GET",
+          success: function (data) {
+            $("#tourName").text(data.name);
+            $("#tourImage").attr("src", data.image);
+            $("#tourTitle").text(data.title);
+            $("#tourDescription").text(data.description);
+          },
+          error: function (error) {
+            console.error(error);
+            // Handle error gracefully, e.g., display an error message to the user
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

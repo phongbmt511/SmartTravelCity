@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/png" href="/Public/Image/icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link
       href="https://cdn.jsdelivr.net/npm/remixicon@3.0.0/fonts/remixicon.css"
       rel="stylesheet"
@@ -15,6 +23,27 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/Public/Style/home.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <!-- page header -->
@@ -24,14 +53,14 @@
         <li class="link"><a href="/home">Home</a></li>
         <li class="link"><a href="/blog">Blog</a></li>
         <li class="link"><a href="/tours">Tours</a></li>
-        <li class="link"><a href="#">Services</a></li>
+        <li class="link"><a href="/services">Services</a></li>
         <li class="link"><a href="/contact">Contacts</a></li>
       </ul>
     </nav>
     <header>
       <div class="section__container">
         <div class="header__content">
-          <h1>Travel</h1>
+          <!-- <h4>Discover the most engaging places</h4>
           <p>
             Embark on an unforgettable journey and discover the world's most
             mesmerizing destinations with our expert travel guidance. Whether
@@ -39,10 +68,11 @@
             wonders, our extensive travel guides and insider tips have you
             well-prepared for an extraordinary adventure.
           </p>
-          <button>Read more</button>
+          <button>Read more</button> -->
         </div>
       </div>
     </header>
+
     <!-- page body -->
     <section class="journey__container">
       <div class="section__container">
@@ -51,81 +81,165 @@
         <div class="journey__grid">
           <div class="country__card">
             <img
-              src="https://images.pexels.com/photos/533937/pexels-photo-533937.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/5671074/pexels-photo-5671074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="country"
             />
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
-              <span>Phan Thiết</span>
+              <span>Paris, France</span>
             </div>
           </div>
           <div class="country__card">
             <img
-              src="https://images.pexels.com/photos/226424/pexels-photo-226424.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/2676642/pexels-photo-2676642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="country"
             />
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
-              <span>Đà Lạt</span>
+              <span>Rome, Italy</span>
             </div>
           </div>
           <div class="country__card">
             <img
-              src="https://images.pexels.com/photos/50594/sea-bay-waterfront-beach-50594.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/5876668/pexels-photo-5876668.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="country"
             />
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
-              <span>Nha Trang</span>
+              <span>New York City, USA</span>
             </div>
           </div>
           <div class="country__card">
             <img
-              src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/2339009/pexels-photo-2339009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="country"
             />
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
-              <span>Ninh Bình</span>
+              <span>Tokyo, Japan</span>
             </div>
           </div>
           <div class="country__card">
             <img
-              src="https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/19383435/pexels-photo-19383435/free-photo-of-n-c-con-song-thap-n-c-anh.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="country"
             />
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
-              <span>Gia Lai</span>
+              <span>London, United Kingdom</span>
             </div>
           </div>
           <div class="country__card">
             <img
-              src="https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              src="https://images.pexels.com/photos/19872/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="country"
             />
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
-              <span>Hồ Chí Minh</span>
+              <span>Beijing, China</span>
             </div>
           </div>
         </div>
       </div>
     </section>
+
     <section class="banner__container">
       <div class="section__container">
         <div class="banner__content">
-          <h2>Discount 15-30% Off</h2>
+          <h2>App Weather</h2>
           <p>
-            Embark on a global adventure without draining your wallet by taking
-            advantage of our unbeatable discounted travel deals. Whether you're
-            seeking a spontaneous last-minute getaway or carefully planning
-            ahead, we have you covered with incredible discounts on flights,
-            hotels, and vacation packages. Seize the opportunity, book now, and
-            indulge in the adventure of a lifetime without compromising your
-            budget.
+            Weather profoundly shapes the travel experience, influencing
+            destination choices, activities, and cultural engagements. Beyond
+            comfort, it impacts transportation, outdoor plans, and appropriate
+            attire. Seasonal patterns and local climates necessitate careful
+            trip planning. Weather also plays a pivotal role in cultural events,
+            enriching the overall travel experience. Understanding and adapting
+            to these nuances enhance the journey, creating dynamic encounters
+            with diverse landscapes and cultures. In essence, weather acts as a
+            silent yet powerful orchestrator, shaping the narrative of every
+            travel adventure .
           </p>
-          <button>See Tours</button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Open
+          </button>
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5
+                    class="modal-title"
+                    id="exampleModalLabel"
+                    style="color: black"
+                  >
+                    Weather
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div id="weather">
+                    <input
+                      type="text"
+                      placeholder="Search..."
+                      class="input-search"
+                    />
+                    <div class="content">
+                      <h1 class="name">
+                        <span class="city"></span>
+                        <span style="color: black">,</span>
+                        <span class="country"></span>
+                      </h1>
+                      <p class="time"></p>
+                      <div class="temperature">
+                        <span class="value"></span>
+                        <span><sup>o</sup>C</span>
+                      </div>
+                      <div class="short-desc"></div>
+                      <div class="more-desc">
+                        <div class="visibility">
+                          <i class="far fa-eye"></i>
+                          <span></span>
+                        </div>
+                        <div class="wind">
+                          <i class="fas fa-wind"></i>
+                          <span></span>
+                        </div>
+                        <div class="cloud">
+                          <i class="fas fa-cloud-sun"></i>
+                          <span></span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -139,8 +253,8 @@
         <div class="display__grid">
           <div class="display__card grid-1">
             <img
-              src="https://cdn1.img.sputniknews.vn/img/07e7/04/04/22216657_0:318:3077:2048_1920x0_80_0_0_59f014a37f358002777509dfaea2c802.jpg"
-              alt="grid"
+              src="https://images.pexels.com/photos/533937/pexels-photo-533937.jpeg?auto=compress&cs=tinysrgb&w=600"
+              alt="image"
             />
           </div>
           <div class="display__card">
@@ -150,14 +264,14 @@
           </div>
           <div class="display__card">
             <img
-              src="https://cdn1.img.sputniknews.vn/img/07e7/04/04/22216657_0:318:3077:2048_1920x0_80_0_0_59f014a37f358002777509dfaea2c802.jpg"
-              alt="grid"
+              src="https://images.pexels.com/photos/884788/pexels-photo-884788.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="image"
             />
           </div>
           <div class="display__card">
             <img
-              src="https://cdn1.img.sputniknews.vn/img/07e7/04/04/22216657_0:318:3077:2048_1920x0_80_0_0_59f014a37f358002777509dfaea2c802.jpg"
-              alt="grid"
+              src="https://images.pexels.com/photos/36744/agriculture-arable-clouds-countryside.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="image"
             />
           </div>
           <div class="display__card">
@@ -168,6 +282,8 @@
         </div>
       </div>
     </section>
+    <!-- ------------------------------------------ -->
+
     <!-- page footer -->
     <footer class="footer">
       <div class="cont">
@@ -213,11 +329,70 @@
         <p>Welcome to Travel</p>
       </div>
     </footer>
-    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <!-- <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       chat-title="travel_chat"
       agent-id="9b7ef7c3-c2e0-42d3-a1af-8757033bf5b0"
       language-code="en"
+    ></df-messenger> -->
+    <!-- ------------------------ -->
+    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <df-messenger
+      intent="WELCOME"
+      chat-title="Chat"
+      agent-id="0059705b-ffcf-49f8-bf12-272dcc6f6459"
+      language-code="en"
     ></df-messenger>
+    <script>
+      const input = document.querySelector(".input-search");
+
+      function changeWeatherUI(weather) {
+        const city = document.querySelector(".name .city");
+        const country = document.querySelector(".name .country");
+        const time = document.querySelector(".time");
+        const temperature = document.querySelector(".temperature .value");
+        const shortDesc = document.querySelector(".short-desc");
+
+        const visibility = document.querySelector(".visibility span");
+        const wind = document.querySelector(".wind span");
+        const cloud = document.querySelector(".cloud span");
+
+        city.innerHTML = weather.name;
+        country.innerHTML = weather.sys.country;
+        time.innerHTML = new Date().toLocaleString();
+        shortDesc.innerHTML = weather.weather[0].main;
+
+        const temp = Math.round(weather.main.temp);
+        temperature.innerHTML = temp;
+
+        temp >= 18
+          ? (document.body.className = "hot")
+          : (document.body.className = "cold");
+
+        visibility.innerHTML = weather.visibility + " (m)";
+        wind.innerHTML = weather.wind.speed + " (m/s)";
+        cloud.innerHTML = weather.clouds.all + " (%)";
+      }
+
+      input.addEventListener("keyup", (e) => {
+        if (e.keyCode === 13) {
+          getWeather(e.target.value);
+        }
+      });
+
+      async function getWeather(input) {
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&units=metric&appid=67ffce63d19a94c476e09e1e427d491e`;
+
+        const res = await fetch(url);
+        const weather = await res.json();
+        console.log(weather);
+
+        changeWeatherUI(weather);
+      }
+
+      getWeather("ho chi minh");
+
+      // -------------------------
+    </script>
   </body>
 </html>

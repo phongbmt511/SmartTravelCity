@@ -31,12 +31,17 @@ img {
 
 section {
   padding: 3rem 0 2rem;
+  background-color: #e8f1fa;
 }
 
 .container {
   max-width: 1068px;
   margin: auto;
   width: 100%;
+}
+body {
+  background-color: #e8f1fa;
+  z-index: -1;
 }
 
 a {
@@ -84,6 +89,7 @@ nav {
   display: grid;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .home-text {
@@ -105,7 +111,8 @@ nav {
   justify-content: center;
   align-items: center;
   column-gap: 1.5rem;
-  margin-top: 2rem !important;
+  /* margin-top: 2rem !important; */
+  margin-bottom: 30px;
 }
 
 .filter-item {
@@ -131,7 +138,8 @@ nav {
 .post-box {
   line-height: 22px;
   background: var(--bg-color);
-  box-shadow: 0 4px 14px hsl(35deg 25% 15% / 10%);
+  box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px,
+    rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
   padding: 15px;
   border-radius: 0.5rem;
 }
