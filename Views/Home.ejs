@@ -79,6 +79,13 @@
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
               <span>Paris, France</span>
+              <div class="country__rating" style="padding-left: 100px;">
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
             </div>
           </div>
           <div class="country__card">
@@ -89,6 +96,13 @@
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
               <span>Rome, Italy</span>
+              <div class="country__rating" style="padding-left: 120px;">
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
             </div>
           </div>
           <div class="country__card">
@@ -99,6 +113,13 @@
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
               <span>New York City, USA</span>
+              <div class="country__rating" style="padding-left: 60px;">
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
             </div>
           </div>
           <div class="country__card">
@@ -109,6 +130,13 @@
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
               <span>Tokyo, Japan</span>
+              <div class="country__rating" style="padding-left: 100px;">
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
             </div>
           </div>
           <div class="country__card">
@@ -119,6 +147,13 @@
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
               <span>London, United Kingdom</span>
+              <div class="country__rating" style="padding-left: 20px;">
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
             </div>
           </div>
           <div class="country__card">
@@ -129,6 +164,13 @@
             <div class="country__name">
               <i class="ri-map-pin-2-fill"></i>
               <span>Beijing, China</span>
+              <div class="country__rating" style="padding-left: 90px;">
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
             </div>
           </div>
         </div>
@@ -310,7 +352,7 @@
         <p>Welcome To Travel</p>
       </div>
     </footer>
-    <!-- ------------------------ -->
+    <!-- app chat  -->
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
     <df-messenger
       intent="WELCOME"
@@ -320,7 +362,6 @@
     ></df-messenger>
     <script>
       const input = document.querySelector(".input-search");
-
       function changeWeatherUI(weather) {
         const city = document.querySelector(".name .city");
         const country = document.querySelector(".name .country");
@@ -364,10 +405,68 @@
 
         changeWeatherUI(weather);
       }
-
       getWeather("ho chi minh");
 
       // -------------------------
+     document.addEventListener("DOMContentLoaded", function () {
+    const starsContainers = document.querySelectorAll('.country__rating');
+
+    starsContainers.forEach((starsContainer, countryIndex) => {
+      const stars = starsContainer.querySelectorAll('.bx-star');
+
+      stars.forEach((star, starIndex) => {
+        star.addEventListener('click', function () {
+          resetStars(starsContainer);
+          highlightStars(stars, starIndex + 1);
+          saveRatingToLocalStorage(countryIndex, starIndex + 1);
+        });
+
+        star.addEventListener('mouseover', function () {
+          resetStars(starsContainer);
+          highlightStars(stars, starIndex + 1);
+        });
+
+        star.addEventListener('mouseout', function () {
+          resetStars(starsContainer);
+          const savedRating = getRatingFromLocalStorage(countryIndex);
+          if (savedRating) {
+            highlightStars(stars, savedRating);
+          }
+        });
+      });
+
+      // Restore the rating from localStorage on page load
+      const savedRating = getRatingFromLocalStorage(countryIndex);
+      if (savedRating) {
+        highlightStars(stars, savedRating);
+      }
+    });
+
+    function resetStars(starsContainer) {
+      const stars = starsContainer.querySelectorAll('.bx-star');
+      stars.forEach(star => {
+        star.classList.remove('highlight');
+      });
+    }
+
+    function highlightStars(stars, index) {
+      for (let i = 0; i < index; i++) {
+        stars[i].classList.add('highlight');
+      }
+    }
+
+    function saveRatingToLocalStorage(countryIndex, rating) {
+      // Use a unique key for each country
+      const key = `userRating_${countryIndex}`;
+      localStorage.setItem(key, rating);
+    }
+
+    function getRatingFromLocalStorage(countryIndex) {
+      // Use the same unique key for each country
+      const key = `userRating_${countryIndex}`;
+      return localStorage.getItem(key);
+    }
+  });
     </script>
   </body>
 </html>

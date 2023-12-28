@@ -633,3 +633,23 @@ body.cold #weather {
 #weather .content .more-desc > div span {
   margin-top: 15px;
 }
+/* ------------------------ */
+.country__rating {
+  display: flex;
+  align-items: center;
+}
+
+.bx-star {
+  font-size: 40px;
+  /* Set the star color */
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.bx-star.highlight {
+  color: gold; /* Set the highlighted star color */
+}
+
+.bx-star:hover {
+  color: gold; /* Set the hover color */
+}
