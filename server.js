@@ -89,6 +89,8 @@ app.get('/services', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
+
+
 app.use('/api', routerTour);
 app.use('/api/account', routerUser);
 app.use('/api', routerBlog)

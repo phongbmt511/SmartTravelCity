@@ -63,6 +63,10 @@
         </div>
       </div> -->
     </div>
+    <div id="image-modal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="modal-image" />
+    </div>
     <!-- page footer -->
     <footer class="footer">
       <div class="cont">
@@ -77,11 +81,11 @@
           <div>
             <h4>Menu</h4>
             <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">Tours</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Contacts</a></li>
+              <li><a href="/home">Home</a></li>
+              <li><a href="/blog">Blog</a></li>
+              <li><a href="/tours">Tours</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/contact">Contacts</a></li>
             </ul>
           </div>
           <div>
@@ -168,6 +172,32 @@
             $(`.post-box.${filterValue}`).show("1000");
           }
         });
+      });
+      // ---------
+      $(".post").on("click", ".post-title", function () {
+        // Find post-box and get the image source
+        const imageUrl = $(this)
+          .closest(".post-box")
+          .find(".post-img")
+          .attr("src");
+
+        // Set the image source for the modal
+        $("#modal-image").attr("src", imageUrl);
+
+        // Show the modal
+        $("#image-modal").css("display", "block");
+      });
+
+      // Đóng modal khi người dùng click vào nút đóng
+      $(".close").click(function () {
+        $("#image-modal").css("display", "none");
+      });
+
+      // Đóng modal khi người dùng click ra ngoài modal
+      $(window).click(function (event) {
+        if (event.target.id === "image-modal") {
+          $("#image-modal").css("display", "none");
+        }
       });
     </script>
   </body>

@@ -53,25 +53,25 @@
         })
           .then((response) => {
             if (response.status === 200) {
-              alert("Login successfully");
-              // Redirect to the home page if login is successful
+              alert("Login thành công");
+              // chuyen toi page home khi dang nhap thanh cong
               window.location.href = "/home";
             } else if (response.status === 401) {
-              // Handle incorrect credentials
+              // xu ly khi dang nhap ko thanh cong
               alert("Login failed");
             } else {
-              // Handle other errors
+              // loi other
               alert("Error");
             }
           })
           .catch((error) => {
             console.error("Error:", error);
-            // Handle network errors
+            // loi server
             alert("Network error");
           });
       }
 
-      // Add a click event listener to the login button
+      // click btn login
       document
         .getElementById("loginButton")
         .addEventListener("click", handleLogin);

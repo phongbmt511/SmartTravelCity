@@ -17,7 +17,7 @@ router.post('/register', (req, res, next) => {
     })
         .then(data => {
             if (data) {
-                res.json('user nay da ton tai')
+                res.json('User nay da ton tai ')
             } else {
                 return AccountModel.create({
                     username: username,

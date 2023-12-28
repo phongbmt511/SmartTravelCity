@@ -12,7 +12,6 @@
     <div class="signup">
       <div class="signup__container">
         <h1>Register</h1>
-        <!-- Added IDs for form elements -->
         <form id="registrationForm">
           <h5>Username</h5>
           <input type="text" class="input-signup-username" id="usernameInput" />
@@ -29,11 +28,11 @@
 </html>
     <script>
       function registerUser() {
-        // Get values from the form
+        // lấy value từ form
         const username = document.getElementById("usernameInput").value;
         const password = document.getElementById("passwordInput").value;
 
-        // Send a POST request to the server to register the user
+        // Gửi yêu cầu POST tới máy chủ để đăng ký người dùng
         fetch("/api/account/register", {
           method: "POST",
           headers: {
@@ -43,8 +42,11 @@
         })
           .then((response) => response.json())
           .then((data) => {
-            // Handle the response from the server
-            alert(data); // You might want to handle this more gracefully in a real application
+            // xử lý phản hồi từ server
+            alert(data);
+             // Xóa dữ liệu trong ô input sau khi đăng ký thành công
+            document.getElementById("usernameInput").value = "";
+            document.getElementById("passwordInput").value = "";
           })
           .catch((error) => {
             console.error("Error:", error);
