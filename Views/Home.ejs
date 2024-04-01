@@ -64,7 +64,6 @@
         </div>
       </div>
     </header>
-
     <!-- page body -->
     <section class="journey__container">
       <div class="section__container">
@@ -340,10 +339,10 @@
           <div>
             <h4>Contacts</h4>
             <div class="socialButton">
-              <a><i class="bx bxl-instagram-alt"></i></a>
-              <a><i class="bx bxl-facebook"></i></a>
-              <a><i class="bx bxl-twitter"></i></a>
-              <a><i class="bx bxl-discord-alt"></i></a>
+              <a href="/services"><i class="bx bxl-instagram-alt"></i></a>
+              <a href="/services"><i class="bx bxl-facebook"></i></a>
+              <a href="/services"><i class="bx bxl-twitter"></i></a>
+              <a href="/services"><i class="bx bxl-discord-alt"></i></a>
             </div>
           </div>
         </div>
@@ -407,66 +406,84 @@
       }
       getWeather("ho chi minh");
 
-      // -------------------------
-     document.addEventListener("DOMContentLoaded", function () {
-    const starsContainers = document.querySelectorAll('.country__rating');
+  // -------------------------
+    document.addEventListener("DOMContentLoaded", function () {
+  // Chọn tất cả các phần tử có class 'country__rating'
+  const starsContainers = document.querySelectorAll('.country__rating');
 
-    starsContainers.forEach((starsContainer, countryIndex) => {
-      const stars = starsContainer.querySelectorAll('.bx-star');
+  // Duyệt qua từng container 
+  starsContainers.forEach((starsContainer, countryIndex) => {
+  // Chọn tất cả star trong container 
+    const stars = starsContainer.querySelectorAll('.bx-star');
 
-      stars.forEach((star, starIndex) => {
-        star.addEventListener('click', function () {
-          resetStars(starsContainer);
-          highlightStars(stars, starIndex + 1);
-          saveRatingToLocalStorage(countryIndex, starIndex + 1);
-        });
-
-        star.addEventListener('mouseover', function () {
-          resetStars(starsContainer);
-          highlightStars(stars, starIndex + 1);
-        });
-
-        star.addEventListener('mouseout', function () {
-          resetStars(starsContainer);
-          const savedRating = getRatingFromLocalStorage(countryIndex);
-          if (savedRating) {
-            highlightStars(stars, savedRating);
-          }
-        });
+    // Duyệt qua từng star trong container
+    stars.forEach((star, starIndex) => {
+      // Bắt sự kiện khi click vào một sao
+      star.addEventListener('click', function () {
+        // Đặt lại trạng thái của tất cả star trong container
+        resetStars(starsContainer);
+        // Highlight star đến vị trí được click
+        highlightStars(stars, starIndex + 1);
+        // Lưu đánh giá vào Local Storage 
+        saveRatingToLocalStorage(countryIndex, starIndex + 1);
       });
 
-      // Restore the rating from localStorage on page load
-      const savedRating = getRatingFromLocalStorage(countryIndex);
-      if (savedRating) {
-        highlightStars(stars, savedRating);
-      }
+      // Bắt sự kiện khi di chuột qua star
+      star.addEventListener('mouseover', function () {
+        // Đặt lại trạng thái của tất cả star trong container
+        resetStars(starsContainer);
+        // Highlight star đến vị trí được di chuột qua
+        highlightStars(stars, starIndex + 1);
+      });
+
+      // Bắt sự kiện khi di chuột ra khỏi star
+      star.addEventListener('mouseout', function () {
+        // Đặt lại trạng thái của tất cả star trong container
+        resetStars(starsContainer);
+        // Lấy đánh giá đã lưu từ Local Storage và highlight star tương ứng
+        const savedRating = getRatingFromLocalStorage(countryIndex);
+        if (savedRating) {
+          highlightStars(stars, savedRating);
+        }
+      });
     });
 
-    function resetStars(starsContainer) {
-      const stars = starsContainer.querySelectorAll('.bx-star');
-      stars.forEach(star => {
-        star.classList.remove('highlight');
-      });
-    }
-
-    function highlightStars(stars, index) {
-      for (let i = 0; i < index; i++) {
-        stars[i].classList.add('highlight');
-      }
-    }
-
-    function saveRatingToLocalStorage(countryIndex, rating) {
-      // Use a unique key for each country
-      const key = `userRating_${countryIndex}`;
-      localStorage.setItem(key, rating);
-    }
-
-    function getRatingFromLocalStorage(countryIndex) {
-      // Use the same unique key for each country
-      const key = `userRating_${countryIndex}`;
-      return localStorage.getItem(key);
+    // save đánh giá từ Local Storage khi trang được tải
+    const savedRating = getRatingFromLocalStorage(countryIndex);
+    if (savedRating) {
+      highlightStars(stars, savedRating);
     }
   });
+
+  // Hàm đặt lại trạng thái của tất cả star trong container
+  function resetStars(starsContainer) {
+    const stars = starsContainer.querySelectorAll('.bx-star');
+    stars.forEach(star => {
+      star.classList.remove('highlight');
+    });
+  }
+
+  // Hàm highlight star đến vị trí chỉ định
+  function highlightStars(stars, index) {
+    for (let i = 0; i < index; i++) {
+      stars[i].classList.add('highlight');
+    }
+  }
+
+  // Hàm save đánh giá vào Local Storage
+  function saveRatingToLocalStorage(countryIndex, rating) {
+    // Su dung mot key duy nhat cho moi countryIndex
+    const key = `userRating_${countryIndex}`;
+    localStorage.setItem(key, rating);
+  }
+
+  // Hàm lấy đánh giá từ Local Storage
+  function getRatingFromLocalStorage(countryIndex) {
+    // Sử dụng cùng một key duy nhất cho mỗi countryIndex
+    const key = `userRating_${countryIndex}`;
+    return localStorage.getItem(key);
+  }
+});
     </script>
   </body>
 </html>

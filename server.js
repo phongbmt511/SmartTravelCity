@@ -90,7 +90,6 @@ app.get('/services', (req, res) => {
     }
 });
 
-
 app.use('/api', routerTour);
 app.use('/api/account', routerUser);
 app.use('/api', routerBlog)

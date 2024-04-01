@@ -131,18 +131,20 @@
               // Tạo phần tử HTML cho mỗi blog
               var blogElement = `
             <div class="post-box ${blog.category.toLowerCase()}">
-              <img src="${blog.cardImage}" alt="" class="post-img" />
-              <h2 class="category">${blog.category}</h2>
-              <a href="#" class="post-title">${blog.title}</a>
-              <span class="post-date">${new Date(
-                blog.date
-              ).toLocaleDateString()}</span>
-              <p class="post-description">${blog.description}</p>
-              <div class="profile">
-                <img src="${blog.profileImage}" alt="" class="profile-img" />
-                <span class="profile-name">${blog.author}</span>
-              </div>
-            </div>`;
+  <img src="${blog.cardImage}" alt="" class="post-img" />
+  
+  <!-- Thêm biểu tượng trái tim -->
+  <h2 class="category">${blog.category}</h2>
+  <a href="#" class="post-title">${blog.title}</a>
+  <span class="post-date">${new Date(blog.date).toLocaleDateString()}</span>
+  <p class="post-description">${blog.description}</p>
+  <div class="profile">
+    <img src="${blog.profileImage}" alt="" class="profile-img" />
+    <span class="profile-name">${blog.author}</span>
+    <span><i class="bx bx-heart post-like"></i></span>
+  </div>
+  
+</div>`;
 
               // Thêm blogElement vào phần container của bài đăng
               $(".post.container").append(blogElement);
@@ -198,6 +200,11 @@
         if (event.target.id === "image-modal") {
           $("#image-modal").css("display", "none");
         }
+      });
+      // Xử lý sự kiện click cho trái tim
+      $(".post").on("click", ".post-like", function () {
+        // Toggle class để thay đổi màu sắc của trái tim
+        $(this).toggleClass("post-liked");
       });
     </script>
   </body>
