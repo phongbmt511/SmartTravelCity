@@ -484,7 +484,7 @@ nav {
 }
 
 .post-liked {
-  background-color: blue; /* Màu sắc của trái tim khi được click */
+  color: palevioletred; /* Màu sắc của trái tim khi được click */
 }
 .profile-name {
   display: inline-block; /* Đảm bảo phần tử chứa tên tác giả có thể hiển thị inline */

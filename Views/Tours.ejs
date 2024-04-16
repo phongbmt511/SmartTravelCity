@@ -44,6 +44,9 @@
         <div class="card_btn">book now</div>
       </div> -->
     </div>
+    <div class="load-more-container">
+      <button id="loadMoreTours" class="load-more-btn">Xem thêm</button>
+    </div>
     <!-- Page Footer -->
     <footer class="footer">
       <div class="cont">
@@ -96,45 +99,64 @@
       referrerpolicy="no-referrer"
     ></script>
     <script>
+      // Biến để theo dõi trang hiện tại
+      let currentPage = 1;
+      const limitPerPage = 6; // Giới hạn số lượng tours trên mỗi trang
+
       $(document).ready(function () {
-        $.ajax({
-          url: "/api/tours",
-          method: "GET",
-          success: function (data) {
-            // Iterate over the tour data and display it on the page
-            const postContainer = $(".post");
+        // Hàm để tải và hiển thị tours
+        function loadTours(page, limit) {
+          $.ajax({
+            url: `/api/tours?page=${page}&limit=${limit}`,
+            method: "GET",
+            success: function (data) {
+              // Nếu không có thêm dữ liệu, ẩn nút và dừng việc tải thêm
+              if (!data.length) {
+                $("#loadMoreTours").hide();
+                return;
+              }
+              // Hiển thị các tours mới
+              const postContainer = $(".post");
+              data.forEach((tour) => {
+                const postBox = $("<div>").addClass("post-box");
+                const img = $("<img>")
+                  .attr("src", tour.image)
+                  .addClass("post-img")
+                  .attr("alt", "");
+                const category = $("<h2>")
+                  .addClass("category")
+                  .html(`<i class="bx bxs-map bx-xs">${tour.location}</i>`);
+                const title = $("<a>")
+                  .attr("href", "#")
+                  .addClass("post-title")
+                  .text(tour.name);
+                const description = $("<p>")
+                  .addClass("post-description")
+                  .text(tour.title);
+                const cardBtn = $("<div>")
+                  .addClass("card_btn")
+                  .text("Read More")
+                  .click(function () {
+                    window.location.href = `/detail?id=${tour._id}`;
+                  });
 
-            data.forEach((tour) => {
-              const postBox = $("<div>").addClass("post-box");
-              const img = $("<img>")
-                .attr("src", tour.image)
-                .addClass("post-img")
-                .attr("alt", "");
-              const category = $("<h2>")
-                .addClass("category")
-                .html(`<i class="bx bxs-map bx-xs">${tour.location}</i>`);
-              const title = $("<a>")
-                .attr("href", "#")
-                .addClass("post-title")
-                .text(tour.name);
-              const description = $("<p>")
-                .addClass("post-description")
-                .text(tour.title);
-              const cardBtn = $("<div>")
-                .addClass("card_btn")
-                .text("Read More")
-                .click(function () {
-                  // window.location.href = `/api/tours/${tour._id}`;
-                  window.location.href = `/detail?id=${tour._id}`;
-                });
+                postBox.append(img, category, title, description, cardBtn);
+                postContainer.append(postBox);
+              });
+            },
+            error: function (error) {
+              console.error("Error loading tours:", error);
+            },
+          });
+        }
 
-              postBox.append(img, category, title, description, cardBtn);
-              postContainer.append(postBox);
-            });
-          },
-          error: function (error) {
-            console.error(error);
-          },
+        // Gọi hàm tải tours lần đầu tiên với giới hạn đã đặt
+        loadTours(currentPage, limitPerPage);
+
+        // Sự kiện click cho nút Xem Thêm
+        $("#loadMoreTours").on("click", function () {
+          currentPage++; // Tăng số trang
+          loadTours(currentPage, limitPerPage); // Tải thêm tours với giới hạn đã đặt
         });
       });
     </script>

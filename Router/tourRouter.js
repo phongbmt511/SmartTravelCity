@@ -4,12 +4,22 @@ const router = express.Router();
 
 // lấy tất cả tour
 router.get('/tours', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 6;
+    const skip = (page - 1) * limit;
+
     try {
-        const tours = await Tour.find();
+        const tours = await Tour.find().skip(skip).limit(limit);
         res.json(tours);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
+    // try {
+    //     const tours = await Tour.find();
+    //     res.json(tours);
+    // } catch (error) {
+    //     res.status(500).json({ message: error.message });
+    // }
 });
 
 // lấy tour theo id
