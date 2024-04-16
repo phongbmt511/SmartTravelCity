@@ -12,16 +12,10 @@
       <div class="contact-form">
         <h1>Contact <span>Us</span></h1>
         <form id="contactForm">
-          <input type="text" placeholder="Your Name" required />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="E-mail"
-            required
-          />
-          <input type="text" placeholder="Write a Subject" required />
-          <textarea cols="30" rows="10" placeholder="Your Message" required>
+          <input type="text" placeholder="Your Name" id="name" />
+          <input type="email" name="email" id="email" placeholder="E-mail" />
+          <input type="text" placeholder="phone" id="phone" />
+          <textarea cols="30" rows="10" placeholder="Your Message" id="content">
           </textarea>
           <input
             type="submit"
@@ -30,11 +24,57 @@
             value="Submit"
             class="btn"
           />
+          <!-- <button id="submit">Gửi</button> -->
         </form>
       </div>
       <div class="contact-img">
         <img src="https://img.lovepik.com//photo/40020/3644.jpg_860.jpg" />
       </div>
     </section>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const name = document.getElementById("name");
+        const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
+        const content = document.getElementById("content");
+        const submitBtn = document.getElementById("submitBtn");
+        submitBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const data = {
+            nameData: name.value,
+            emailData: email.value,
+            phoneData: phone.value,
+            contentData: content.value,
+          };
+          if (data.nameData && data.emailData && data.phoneData) {
+            alert("Đăng ký thành công");
+            postGoogle(data);
+          } else {
+            alert("thiếu");
+          }
+        });
+        async function postGoogle(data) {
+          const formURL =
+            "https://docs.google.com/forms/d/e/1FAIpQLSfd4DCxJYTz9-NuM4VdC3qKP9fsFtPG4PYQBsWfdGKOTWa13Q/formResponse";
+          const postName = "entry.405917932";
+          const postEmail = "entry.729948450";
+          const postPhone = "entry.1479048733";
+          const postContent = "entry.1586953589";
+          const formData = new FormData();
+          formData.append(postName, data.nameData);
+          formData.append(postEmail, data.emailData);
+          formData.append(postPhone, data.phoneData);
+          formData.append(postContent, data.contentData);
+          try {
+            await fetch(formURL, {
+              method: "POST",
+              body: formData,
+            });
+          } catch {
+            console.log("Error");
+          }
+        }
+      });
+    </script>
   </body>
 </html>
