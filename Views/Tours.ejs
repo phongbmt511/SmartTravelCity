@@ -31,21 +31,15 @@
     <div class="post container">
       <!-- Post 1 -->
       <!-- <div class="post-box">
-        <img
-          src="https://images.pexels.com/photos/533937/pexels-photo-533937.jpeg?auto=compress&cs=tinysrgb&w=600"
-          alt=""
-          class="post-img"
-        />
-        <h2 class="category"><i class="bx bxs-map bx-xs">HCM</i></h2>
-        <a href="#" class="post-title">Hồ Chí Minh</a>
-        <p class="post-description">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-        </p>
-        <div class="card_btn">book now</div>
-      </div> -->
+            <img src="https://images.pexels.com/photos/533937/pexels-photo-533937.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" class="post-img" />
+            <h2 class="category"><i class="bx bxs-map bx-xs">HCM</i></h2>
+            <a href="#" class="post-title">Hồ Chí Minh</a>
+            <p class="post-description">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+            <div class="card_btn">book now</div>
+        </div> -->
     </div>
     <div class="load-more-container">
-      <button id="loadMoreTours" class="load-more-btn">Xem thêm</button>
+      <button id="loadMoreTours" class="load-more-btn">Load More</button>
     </div>
     <!-- Page Footer -->
     <footer class="footer">
@@ -111,10 +105,12 @@
             method: "GET",
             success: function (data) {
               // Nếu không có thêm dữ liệu, ẩn nút và dừng việc tải thêm
-              if (!data.length) {
+              if (data.length < limit) {
                 $("#loadMoreTours").hide();
-                return;
+              } else {
+                $("#loadMoreTours").show();
               }
+
               // Hiển thị các tours mới
               const postContainer = $(".post");
               data.forEach((tour) => {
