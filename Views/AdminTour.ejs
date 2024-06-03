@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel - Manage Tours</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 20px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        height: 100px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .tour-list {
+        margin-top: 20px;
+      }
+
+      .tour-item {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .tour-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .tour-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+
+      .tour-actions button {
+        margin-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Manage Tours</h2>
+      <!-- Form to Add New Tour -->
+      <form id="addTourForm">
+        <label for="name">Tour Name:</label>
+        <input type="text" id="name" name="name" required />
+
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required />
+
+        <label for="image">Image URL:</label>
+        <input type="text" id="image" name="image" required />
+
+        <label for="title">Title:</label>
+        <textarea id="title" name="title" required></textarea>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+
+        <input type="submit" value="Add Tour" />
+      </form>
+
+      <!-- Tour List -->
+      <div class="tour-list" id="tourList">
+        <!-- Tour items will be displayed here -->
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#addTourForm").submit(function (event) {
+          event.preventDefault(); // Ngăn cho form submit theo cách truyền thống
+
+          // Tạo đối tượng tour từ dữ liệu form
+          var tourData = {
+            name: $("#name").val(),
+            location: $("#location").val(), // Sửa lại thành 'location' cho phù hợp với schema
+            image: $("#image").val(),
+            title: $("#title").val(),
+            description: $("#description").val(), // Thêm trường 'description'
+          };
+
+          // Gửi yêu cầu AJAX để thêm mới tour
+          $.ajax({
+            type: "POST",
+            url: "/api/tours", // Sửa thành URL thực tế của bạn
+            data: JSON.stringify(tourData),
+            contentType: "application/json",
+            success: function (response) {
+              alert("Tour added successfully!");
+              loadTours(); // Tải lại danh sách tours
+            },
+            error: function () {
+              alert("Error adding tour.");
+            },
+          });
+        });
+        // Hàm để tải và hiển thị danh sách tours
+        function loadTours() {
+          $.ajax({
+            type: "GET",
+            url: "/api/tours", // Sửa thành URL thực tế của bạn
+            success: function (response) {
+              $("#tourList").empty(); // Xóa danh sách tours hiện tại
+
+              // Duyệt qua từng đối tượng tour và hiển thị nó lên UI
+              $.each(response, function (index, tour) {
+                $("#tourList").append(`<div class="tour-item">
+                        <h3>${tour.name}</h3>
+                        <p><strong>Place:</strong> ${tour.location}</p>
+                        <p><strong>Title:</strong> ${tour.title}</p>
+                        <p><strong>Description:</strong> ${tour.description}</p>
+                        <!-- Thêm các action tương ứng ở đây -->
+                    </div>`);
+              });
+            },
+            error: function () {
+              alert("Error loading tours.");
+            },
+          });
+        }
+
+        // Tải danh sách tours khi trang web ready
+        loadTours();
+      });
+    </script>
+  </body>
+</html>

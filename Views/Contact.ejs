@@ -47,10 +47,10 @@
             contentData: content.value,
           };
           if (data.nameData && data.emailData && data.phoneData) {
-            alert("Đăng ký thành công");
+            alert("Submitted successfully !");
             postGoogle(data);
           } else {
-            alert("thiếu");
+            alert("Submitted Error !");
           }
         });
         async function postGoogle(data) {

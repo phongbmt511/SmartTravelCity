@@ -477,19 +477,45 @@ nav {
   cursor: pointer;
 }
 /* css icon trai tim */
-.post-like {
-  color: #ccc; /* Màu sắc trái tim không được click */
-  cursor: pointer; /* Biểu tượng con trỏ thay đổi khi di chuột qua */
+/* .post-like {
+  color: #ccc; 
+  cursor: pointer; 
   font-size: 20px;
 }
 
 .post-liked {
-  color: palevioletred; /* Màu sắc của trái tim khi được click */
-}
+  color: palevioletred; 
+} */
 .profile-name {
   display: inline-block; /* Đảm bảo phần tử chứa tên tác giả có thể hiển thị inline */
 }
 
 .profile-name + span {
   margin-left: 180px; /* Khoảng cách giữa tên tác giả và biểu tượng trái tim */
+}
+/* CSS cho hiệu ứng trái tim */
+@keyframes heart-beat {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: scale(1);
+  }
+  40% {
+    transform: scale(1.3);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+}
+
+.post-like {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.post-liked {
+  color: red; /* Màu đỏ khi trái tim được "like" */
+  animation: heart-beat 0.6s ease;
 }

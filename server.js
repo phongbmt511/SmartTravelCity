@@ -5,6 +5,7 @@ const routerUser = require('./Router/accountRouter');
 const newLocal = './Router/tourRouter';
 const routerTour = require(newLocal);
 const routerBlog = require('./Router/blogRouter');
+// const cors = require('cors');
 
 
 const app = express();
@@ -16,7 +17,8 @@ async function connect() {
     try {
         await mongoose.connect(url, {
             useNewUrlParser: true,
-            useUnifiedTopology: true
+            useUnifiedTopology: true,
+            // serverSelectionTimeoutMS: 50000, // Tăng thời gian timeout lên 50 giây
         });
         console.log("Connected to mongoose");
     } catch (error) {
@@ -89,10 +91,27 @@ app.get('/services', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-
+app.get('/admintours', (req, res) => {
+    try {
+        res.render('AdminTour', req.query);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+app.get('/admin', (req, res) => {
+    try {
+        res.render('Admin', req.query);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 app.use('/api', routerTour);
 app.use('/api/account', routerUser);
 app.use('/api', routerBlog)
+// app.use(cors());
+app.use(express.json());
 app.listen(3000, () => {
     console.log("Server started on port 3000");
 });

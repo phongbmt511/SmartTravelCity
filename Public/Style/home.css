@@ -639,17 +639,21 @@ body.cold #weather {
   align-items: center;
 }
 
-.bx-star {
-  font-size: 40px;
-  /* Set the star color */
-  cursor: pointer;
-  transition: color 0.3s;
+/* Keyframes for star animation */
+@keyframes star-bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
+/* Highlighted stars */
 .bx-star.highlight {
-  color: gold; /* Set the highlighted star color */
-}
-
-.bx-star:hover {
-  color: gold; /* Set the hover color */
+  color: gold;
+  animation: star-bounce 0.5s ease-in-out;
 }

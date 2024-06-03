@@ -36,9 +36,10 @@ router.get('/tours/:id', async (req, res) => {
 router.post('/tours', async (req, res) => {
     const tour = new Tour({
         name: req.body.name,
-        place: req.body.place,
+        title: req.body.title,
+        location: req.body.location,
         image: req.body.image,
-        title: req.body.title
+        description: req.body.description
     });
 
     try {

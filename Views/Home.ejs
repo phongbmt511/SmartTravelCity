@@ -406,14 +406,14 @@
       }
       getWeather("ho chi minh");
 
-  // -------------------------
-    document.addEventListener("DOMContentLoaded", function () {
+  // -------------------------sụ kiện click ngôi sao -------------
+   document.addEventListener("DOMContentLoaded", function () {
   // Chọn tất cả các phần tử có class 'country__rating'
   const starsContainers = document.querySelectorAll('.country__rating');
 
-  // Duyệt qua từng container 
+  // Duyệt qua từng container
   starsContainers.forEach((starsContainer, countryIndex) => {
-  // Chọn tất cả star trong container 
+    // Chọn tất cả star trong container
     const stars = starsContainer.querySelectorAll('.bx-star');
 
     // Duyệt qua từng star trong container
@@ -424,7 +424,7 @@
         resetStars(starsContainer);
         // Highlight star đến vị trí được click
         highlightStars(stars, starIndex + 1);
-        // Lưu đánh giá vào Local Storage 
+        // Lưu đánh giá vào Local Storage
         saveRatingToLocalStorage(countryIndex, starIndex + 1);
       });
 
@@ -484,6 +484,7 @@
     return localStorage.getItem(key);
   }
 });
+
     </script>
   </body>
 </html>
