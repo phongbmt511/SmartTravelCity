@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+      }
+
+      .sidebar {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        padding-top: 20px;
+      }
+
+      .sidebar h2 {
+        color: white;
+        text-align: center;
+      }
+
+      .sidebar ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .sidebar ul li {
+        padding: 15px;
+        text-align: center;
+      }
+
+      .sidebar ul li a {
+        color: white;
+        text-decoration: none;
+        display: block;
+        font-size: 20px;
+      }
+
+      .sidebar ul li a:hover {
+        color: bisque;
+      }
+
+      .content {
+        margin-left: 260px;
+        padding: 20px;
+        display: none;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      label {
+        font-weight: bold;
+      }
+
+      input[type="text"],
+      textarea {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0 20px 0;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        box-sizing: border-box;
+      }
+
+      textarea {
+        height: 100px;
+      }
+
+      input[type="submit"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      .tour-list {
+        margin-top: 20px;
+      }
+
+      .tour-item {
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .tour-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .tour-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+      }
+
+      .tour-actions button {
+        margin-left: 10px;
+      }
+      /* Đảm bảo rằng ô password có cùng độ rộng với ô username */
+      #password {
+        margin-top: 10px;
+        width: 100%;
+        height: 35px;
+        box-sizing: border-box; /* Đảm bảo độ rộng tính cả padding và border */
+      }
+
+      /* Đảm bảo button "Add User" xuống dòng */
+      #addUserForm input[type="submit"] {
+        display: block; /* Chuyển button thành block để nó xuống dòng */
+        margin-top: 10px; /* Thêm khoảng cách giữa ô password và button */
+      }
+      /* Thêm CSS cho phần tử user */
+      .user-item {
+        margin-top: 10px;
+        border: 1px solid #000; /* Viền màu đen */
+        border-radius: 5px; /* Bo tròn góc viền */
+        padding: 10px; /* Khoảng cách giữa nội dung và viền */
+        margin-bottom: 10px; /* Khoảng cách giữa các phần tử user */
+      }
+      .blog-item {
+        margin-top: 10px;
+        border: 1px solid #000; /* Viền màu đen */
+        border-radius: 5px; /* Bo tròn góc viền */
+        padding: 10px; /* Khoảng cách giữa nội dung và viền */
+        margin-bottom: 10px; /* Khoảng cách giữa các phần tử user */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <h2>Menu</h2>
+      <ul>
+        <li><a href="#tour" onclick="showSection('tourSection')">Tour</a></li>
+        <li><a href="#blog" onclick="showSection('blogSection')">Blog</a></li>
+        <li><a href="#user" onclick="showSection('userSection')">User</a></li>
+        <li>
+          <a href="#logout" onclick="showSection('logoutSection')">Log Out</a>
+        </li>
+      </ul>
+    </div>
+    <div class="content" id="tourSection">
+      <div class="container">
+        <h2>Manage Tours</h2>
+        <!-- Form to Add New Tour -->
+        <form id="addTourForm">
+          <label for="name">Tour Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required />
+
+          <label for="image">Image URL:</label>
+          <input type="text" id="image" name="image" required />
+
+          <label for="title">Title:</label>
+          <textarea id="title" name="title" required></textarea>
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" required></textarea>
+
+          <input type="submit" value="Add Tour" />
+        </form>
+
+        <!-- Tour List -->
+        <div class="tour-list" id="tourList">
+          <!-- Tour items will be displayed here -->
+        </div>
+      </div>
+    </div>
+    <div class="content" id="blogSection">
+      <div class="container">
+        <h2>Manage Blogs</h2>
+        <!-- Form to Add New Blog -->
+        <form id="addBlogForm">
+          <label for="blogTitle">Blog Title:</label>
+          <input type="text" id="blogTitle" name="blogTitle" required />
+
+          <label for="blogCategory">Category:</label>
+          <input type="text" id="blogCategory" name="blogCategory" required />
+
+          <label for="blogDescription">Description:</label>
+          <textarea
+            id="blogDescription"
+            name="blogDescription"
+            required
+          ></textarea>
+
+          <label for="blogCardImage">Card Image URL:</label>
+          <input type="text" id="blogCardImage" name="blogCardImage" required />
+
+          <label for="blogAuthor">Author:</label>
+          <input type="text" id="blogAuthor" name="blogAuthor" required />
+
+          <label for="blogProfileImage">Profile Image URL:</label>
+          <input
+            type="text"
+            id="blogProfileImage"
+            name="blogProfileImage"
+            required
+          />
+
+          <input type="submit" value="Add Blog" />
+        </form>
+
+        <!-- Container to Display Blog List -->
+        <div class="blog-list" id="blogList">
+          <!-- Blog items will be displayed here -->
+        </div>
+      </div>
+    </div>
+
+    <div class="content" id="userSection">
+      <div class="container">
+        <h2>Manage Users</h2>
+        <!-- Form to Add New User -->
+        <form id="addUserForm">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="username" required />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <input type="submit" value="Add User" />
+        </form>
+
+        <!-- Container to Display User List -->
+        <div class="user-list" id="userList">
+          <!-- User items will be displayed here -->
+        </div>
+      </div>
+    </div>
+    <div class="content" id="logoutSection">
+      <div class="container">
+        <h2>Log Out</h2>
+        <p>Logging out...</p>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      function showSection(sectionId) {
+        $(".content").hide(); // Ẩn tất cả các phần tử có class 'content'
+        $("#" + sectionId).show(); // Hiển thị phần tử có id tương ứng
+      }
+      showSection("tourSection");
+      // Trong phần script của file HTML
+      $(document).ready(function () {
+        var allTours = []; // Biến global để lưu trữ tất cả các tours
+
+        function loadAllTours(page = 1) {
+          $.ajax({
+            type: "GET",
+            url: "/api/tours?page=" + page,
+            success: function (response) {
+              if (response.length > 0) {
+                allTours = allTours.concat(response); // Thêm dữ liệu từ trang hiện tại vào biến global
+                loadAllTours(page + 1); // Gọi đệ quy để lấy dữ liệu từ trang tiếp theo
+              } else {
+                // Khi đã lấy hết dữ liệu từ tất cả các trang
+                renderTours(allTours); // Render tất cả các tours
+              }
+            },
+            error: function () {
+              alert("Error loading tours.");
+            },
+          });
+        }
+
+        function renderTours(tours) {
+          $("#tourList").empty(); // Xóa danh sách tour hiện tại
+
+          // Duyệt qua mỗi tour và hiển thị nó
+          tours.forEach((tour) => {
+            $("#tourList").append(`
+            <div class="tour-item">
+                <h3>${tour.name}</h3>
+                <p><strong>Place:</strong> ${tour.location}</p>
+                <p><strong>Title:</strong> ${tour.title}</p>
+                <p><strong>Description:</strong> ${tour.description}</p>
+                <p><img src="${tour.image}" alt="${tour.title}" style="width:100px; height:auto;"></p>
+            </div>
+        `);
+          });
+        }
+
+        // Load tất cả các tour khi trang được tải
+        loadAllTours();
+      });
+      // -----------------------BLOG---------------------
+      $(document).ready(function () {
+        // Function to load and render all blogs
+        function loadAllBlogs() {
+          $.ajax({
+            type: "GET",
+            url: "/api/blogs", // Endpoint to fetch all blogs
+            success: function (response) {
+              renderBlogs(response); // Render all blogs
+            },
+            error: function () {
+              alert("Error loading blogs.");
+            },
+          });
+        }
+
+        // Function to render the list of blogs
+        function renderBlogs(blogs) {
+          // Clear the existing blog list
+          $("#blogList").empty();
+
+          // Render each blog
+          blogs.forEach((blog) => {
+            $("#blogList").append(`
+        <div class="blog-item">
+          <h3>${blog.title}</h3>
+          <p><strong>Category:</strong> ${blog.category}</p>
+          <p>${blog.description}</p>
+          <!-- Add other blog details here -->
+        </div>
+      `);
+          });
+        }
+
+        // Load all blogs when the page is ready
+        loadAllBlogs();
+        // Bắt sự kiện khi form "Add Blog" được submit
+        $("#addBlogForm").submit(function (event) {
+          event.preventDefault(); // Ngăn form submit theo cách truyền thống
+
+          // Lấy dữ liệu từ các trường input trong form
+          var blogData = {
+            category: $("#blogCategory").val(),
+            title: $("#blogTitle").val(),
+            description: $("#blogDescription").val(),
+            cardImage: $("#blogCardImage").val(),
+            author: $("#blogAuthor").val(),
+            profileImage: $("#blogProfileImage").val(),
+          };
+
+          // Gửi yêu cầu AJAX đến máy chủ để thêm mới dữ liệu blog
+          $.ajax({
+            type: "POST",
+            url: "/api/blogs", // Thay đổi thành URL thực tế của bạn
+            data: JSON.stringify(blogData),
+            contentType: "application/json",
+            success: function (response) {
+              // Xử lý phản hồi từ máy chủ
+              alert("Blog added successfully!");
+
+              // Xóa dữ liệu cũ trong form sau khi thêm thành công
+              $("#addBlogForm")[0].reset();
+
+              // Render lại dữ liệu blog mới
+              loadAllBlogs();
+            },
+            error: function () {
+              alert("Error adding blog.");
+            },
+          });
+        });
+      });
+
+      // ----------------------USER---------------
+      // Function to fetch and render the list of users
+      function loadUsers() {
+        $.ajax({
+          type: "GET",
+          url: "/api/account/login", // Endpoint to fetch user data
+          success: function (response) {
+            renderUsers(response); // Render the fetched users
+          },
+          error: function () {
+            alert("Error loading users.");
+          },
+        });
+      }
+
+      // Function to render the list of users
+      function renderUsers(users) {
+        $("#userList").empty(); // Clear the existing user list
+
+        users.forEach((user) => {
+          $("#userList").append(`
+      <div class="user-item">
+        <p><strong>Username:</strong> ${user.username}</p>
+         <p><strong>Password:</strong> ${user.password}</p>  
+      </div>
+    `);
+        });
+      }
+
+      $(document).ready(function () {
+        loadUsers(); // Load users when the page is ready
+
+        // Add User Form Submission
+        $("#addUserForm").submit(function (event) {
+          event.preventDefault();
+
+          var userData = {
+            username: $("#username").val(),
+            password: $("#password").val(),
+          };
+
+          $.ajax({
+            type: "POST",
+            url: "/api/register",
+            data: JSON.stringify(userData),
+            contentType: "application/json",
+            success: function (response) {
+              alert("User added successfully!");
+              loadUsers(); // Reload user list after adding user
+            },
+            error: function () {
+              alert("Error adding user.");
+            },
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

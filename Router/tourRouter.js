@@ -58,14 +58,17 @@ router.patch('/tours/:id', async (req, res) => {
         if (req.body.name) {
             tour.name = req.body.name;
         }
-        if (req.body.place) {
-            tour.place = req.body.place;
+        if (req.body.location) {
+            tour.location = req.body.location;
         }
         if (req.body.image) {
             tour.image = req.body.image;
         }
         if (req.body.title) {
             tour.title = req.body.title;
+        }
+        if (req.body.description) {
+            tour.description = req.body.description;
         }
 
         const updatedTour = await tour.save();

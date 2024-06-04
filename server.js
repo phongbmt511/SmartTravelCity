@@ -91,14 +91,7 @@ app.get('/services', (req, res) => {
         res.status(500).send('Internal Server Error');
     }
 });
-app.get('/admintours', (req, res) => {
-    try {
-        res.render('AdminTour', req.query);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+
 app.get('/admin', (req, res) => {
     try {
         res.render('Admin', req.query);
