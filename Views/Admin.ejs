@@ -154,6 +154,14 @@
         padding: 10px; /* Khoảng cách giữa nội dung và viền */
         margin-bottom: 10px; /* Khoảng cách giữa các phần tử user */
       }
+      button[type="button"] {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
     </style>
   </head>
   <body>
@@ -184,7 +192,10 @@
           <label for="description">Description:</label>
           <textarea id="description" name="description" required></textarea>
 
-          <input type="submit" value="Add Tour" />
+          <input type="submit" value="Add Tour"></input>
+          <button type="button" id="updateTourButton" style="display: none">
+            Update Tour
+          </button>
         </form>
 
         <!-- Tour List -->
@@ -270,6 +281,7 @@
       // Trong phần script của file HTML
       $(document).ready(function () {
         var allTours = []; // Biến global để lưu trữ tất cả các tours
+        var currentEditTourId = null; // Biến để lưu trữ ID của tour đang được chỉnh sửa
 
         function loadAllTours(page = 1) {
           $.ajax({
@@ -290,7 +302,48 @@
           });
         }
 
-        // funtion DELETE
+        // Function to edit a tour
+        function editTour(id, name, location, title, description, image) {
+          // Populate the form with existing tour data
+          $("#name").val(name);
+          $("#location").val(location);
+          $("#title").val(title);
+          $("#description").val(description);
+          $("#image").val(image);
+
+          // Store the current tour ID
+          currentEditTourId = id;
+
+          // Show the Update button and hide the Add button
+          $("#updateTourButton").show();
+          $("#addTourButton").hide();
+        }
+
+        // Function to update a tour
+        function updateTour() {
+          var tourData = {
+            name: $("#name").val(),
+            location: $("#location").val(),
+            title: $("#title").val(),
+            description: $("#description").val(),
+            image: $("#image").val(),
+          };
+
+          $.ajax({
+            type: "PATCH",
+            url: `/api/tours/${currentEditTourId}`, // Endpoint to update the tour
+            data: JSON.stringify(tourData),
+            contentType: "application/json",
+            success: function (response) {
+              alert("Tour updated successfully!");
+              location.reload(); // Reload the page
+            },
+            error: function () {
+              alert("Error updating tour.");
+            },
+          });
+        }
+
         function deleteTour(tourId) {
           console.log(tourId);
           $.ajax({
@@ -298,6 +351,7 @@
             url: `/api/tours/${tourId}`,
             success: function (response) {
               alert("Tour deleted successfully!");
+              // location.reload();
               const tourElement = document.getElementById(tourId);
               if (tourElement) {
                 tourElement.parentNode.removeChild(tourElement);
@@ -312,32 +366,83 @@
             },
           });
         }
+
         function renderTours(tours) {
           $("#tourList").empty(); // Xóa danh sách tour hiện tại
 
           // Duyệt qua mỗi tour và hiển thị nó
           tours.forEach((tour) => {
             $("#tourList").append(`
-                 <div id="${tour._id}" class="tour-item">
-                     <h3>${tour.name}</h3>
-                     <p><strong>Place:</strong> ${tour.location}</p>
-                     <p><strong>Title:</strong> ${tour.title}</p>
-                     <p><strong>Description:</strong> ${tour.description}</p>
-                     <p><img src="${tour.image}" alt="${tour.title}" style="width:100px; height:auto;"></p>
-                     <div class="tour-actions">
-                     <button class="tour-delete-btn">Delete</button>
-                    <button class-"tour-edit-btn">Edit</button>
-                   </div>
-                 </div>
-             `);
+        <div id="${tour._id}" class="tour-item">
+          <h3>${tour.name}</h3>
+          <p><strong>Place:</strong> ${tour.location}</p>
+          <p><strong>Title:</strong> ${tour.title}</p>
+          <p><strong>Description:</strong> ${tour.description}</p>
+          <p><img src="${tour.image}" alt="${tour.title}" style="width:100px; height:auto;"></p>
+          <div class="tour-actions">
+            <button class="tour-delete-btn">Delete</button>
+            <button class="tour-edit-btn">Edit</button>
+          </div>
+        </div>
+      `);
           });
+
+          // Add event listeners to delete buttons
           const deleteButtons = document.querySelectorAll(".tour-delete-btn");
           deleteButtons.forEach((button, index) => {
             button.addEventListener("click", () =>
               deleteTour(tours[index]._id)
             );
           });
+
+          // Add event listeners to edit buttons
+          const editButtons = document.querySelectorAll(".tour-edit-btn");
+          editButtons.forEach((button, index) => {
+            button.addEventListener("click", () =>
+              editTour(
+                tours[index]._id,
+                tours[index].name,
+                tours[index].location,
+                tours[index].title,
+                tours[index].description,
+                tours[index].image
+              )
+            );
+          });
         }
+
+        // Handle form submission for adding a new tour
+        $("#tourForm").submit(function (event) {
+          event.preventDefault();
+
+          var tourData = {
+            name: $("#name").val(),
+            location: $("#location").val(),
+            image: $("#image").val(),
+            title: $("#title").val(),
+            description: $("#description").val(),
+          };
+
+          $.ajax({
+            type: "POST",
+            url: "/api/tours", // Endpoint to add a new tour
+            data: JSON.stringify(tourData),
+            contentType: "application/json",
+            success: function (response) {
+              alert("Tour added successfully!");
+              location.reload(); // Reload the page
+            },
+            error: function () {
+              alert("Error adding tour.");
+            },
+          });
+        });
+
+        // Handle click event for the Update Tour button
+        $("#updateTourButton").click(function () {
+          updateTour();
+        });
+        // button add tour
         $("#addTourForm").submit(function (event) {
           event.preventDefault();
 
@@ -357,7 +462,7 @@
             success: function (response) {
               alert("Tour added successfully!");
               $("#addTourForm")[0].reset(); // Clear the form
-              loadAllTours(); // Reload tours after adding a new tour
+              location.reload(); // Reload the page
             },
             error: function () {
               alert("Error adding tour.");
@@ -368,7 +473,6 @@
         // Load tất cả các tour khi trang được tải
         loadAllTours();
       });
-
       // -----------------------BLOG---------------------
       $(document).ready(function () {
         // Function to load and render all blogs
