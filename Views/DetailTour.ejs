@@ -11,8 +11,24 @@
       rel="stylesheet"
     />
     <link rel="shortcut icon" type="image/png" href="/Public/Image/icon.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
-
+  <style>
+    body,
+    .header-title,
+    .sub-heading,
+    .post-text,
+    .backhome,
+    .footer h2,
+    .footer h4,
+    .footer p,
+    .footer ul li a {
+      font-family: "Roboto", sans-serif;
+    }
+  </style>
   <body>
     <section class="post-header">
       <div class="header-content post-container">
@@ -32,7 +48,6 @@
         <!--Nội dung Detail tours-->
       </p>
     </section>
-
     <!-- page footer -->
     <footer class="footer">
       <div class="cont">
@@ -78,12 +93,14 @@
         <p>Welcome to Travel</p>
       </div>
     </footer>
+
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
       integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     ></script>
+
     <script>
       $(document).ready(function () {
         // Lấy ID từ query parameter

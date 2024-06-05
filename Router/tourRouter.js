@@ -81,7 +81,10 @@ router.patch('/tours/:id', async (req, res) => {
 router.delete('/tours/:id', async (req, res) => {
     try {
         const tour = await Tour.findById(req.params.id);
-        await tour.remove();
+        if (!tour) {
+            return res.status(404).json({ message: 'Tour not found' });
+        }
+        await Tour.deleteOne(tour);
         res.json({ message: 'Tour deleted successfully' });
     } catch (error) {
         res.status(500).json({ message: error.message });
