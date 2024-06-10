@@ -652,8 +652,15 @@ body.cold #weather {
   }
 }
 
-/* Highlighted stars */
-.bx-star.highlight {
-  color: gold;
-  animation: star-bounce 0.5s ease-in-out;
+.country__card img {
+  width: 100%;
+  height: 300px; /* Adjust this value as needed */
+  object-fit: cover;
+}
+.bx-star.star-colored {
+  color: gold; /* Đổi màu sang màu vàng */
+}
+.stars-right {
+  display: flex;
+  margin-left: 120px;
 }

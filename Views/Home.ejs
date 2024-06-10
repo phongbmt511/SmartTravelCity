@@ -68,112 +68,10 @@
     <section class="journey__container">
       <div class="section__container">
         <h2 class="section__title">Start Your Journey</h2>
-        <p class="section__subtitle">The most searched tourist in 2023</p>
+        <p class="section__subtitle">The most searched tourist in 2024</p>
         <div class="journey__grid">
-          <div class="country__card">
-            <img
-              src="https://images.pexels.com/photos/5671074/pexels-photo-5671074.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="country"
-            />
-            <div class="country__name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Paris, France</span>
-              <div class="country__rating" style="padding-left: 100px;">
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-            </div>
+          
           </div>
-          <div class="country__card">
-            <img
-              src="https://images.pexels.com/photos/2676642/pexels-photo-2676642.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="country"
-            />
-            <div class="country__name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Rome, Italy</span>
-              <div class="country__rating" style="padding-left: 120px;">
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-            </div>
-          </div>
-          <div class="country__card">
-            <img
-              src="https://images.pexels.com/photos/5876668/pexels-photo-5876668.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="country"
-            />
-            <div class="country__name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>New York City, USA</span>
-              <div class="country__rating" style="padding-left: 60px;">
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-            </div>
-          </div>
-          <div class="country__card">
-            <img
-              src="https://images.pexels.com/photos/2339009/pexels-photo-2339009.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="country"
-            />
-            <div class="country__name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Tokyo, Japan</span>
-              <div class="country__rating" style="padding-left: 100px;">
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-            </div>
-          </div>
-          <div class="country__card">
-            <img
-              src="https://images.pexels.com/photos/19383435/pexels-photo-19383435/free-photo-of-n-c-con-song-thap-n-c-anh.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="country"
-            />
-            <div class="country__name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>London, United Kingdom</span>
-              <div class="country__rating" style="padding-left: 20px;">
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-            </div>
-          </div>
-          <div class="country__card">
-            <img
-              src="https://images.pexels.com/photos/19872/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-              alt="country"
-            />
-            <div class="country__name">
-              <i class="ri-map-pin-2-fill"></i>
-              <span>Beijing, China</span>
-              <div class="country__rating" style="padding-left: 90px;">
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="banner__container">
@@ -406,84 +304,96 @@
       }
       getWeather("ho chi minh");
 
-  // -------------------------sụ kiện click ngôi sao -------------
-   document.addEventListener("DOMContentLoaded", function () {
-  // Chọn tất cả các phần tử có class 'country__rating'
-  const starsContainers = document.querySelectorAll('.country__rating');
+  
+// render giao diện
+// Hàm gửi yêu cầu AJAX đến endpoint API và xử lý dữ liệu nhận được
+function fetchTourData() {
+  fetch('/api/tours')
+    .then(response => response.json())
+    .then(data => {
+      // Lấy ngẫu nhiên 6 tour từ danh sách dữ liệu nhận được
+      const randomTours = getRandomElements(data, 6);
+      // Hiển thị ảnh của các tour ngẫu nhiên trên trang web
+      displayTourImages(randomTours);
+    })
+    .catch(error => console.error('Error fetching tour data:', error));
+}
 
-  // Duyệt qua từng container
-  starsContainers.forEach((starsContainer, countryIndex) => {
-    // Chọn tất cả star trong container
-    const stars = starsContainer.querySelectorAll('.bx-star');
+// Hàm chọn ngẫu nhiên 'count' phần tử từ một mảng
+function getRandomElements(arr, count) {
+  const shuffled = arr.sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
 
-    // Duyệt qua từng star trong container
-    stars.forEach((star, starIndex) => {
-      // Bắt sự kiện khi click vào một sao
-      star.addEventListener('click', function () {
-        // Đặt lại trạng thái của tất cả star trong container
-        resetStars(starsContainer);
-        // Highlight star đến vị trí được click
-        highlightStars(stars, starIndex + 1);
-        // Lưu đánh giá vào Local Storage
-        saveRatingToLocalStorage(countryIndex, starIndex + 1);
-      });
+// Hàm hiển thị ảnh của các tour trên trang web
+function displayTourImages(tours) {
+  const journeyGrid = document.querySelector('.journey__grid');
+  journeyGrid.innerHTML = ''; // Xóa nội dung cũ
 
-      // Bắt sự kiện khi di chuột qua star
-      star.addEventListener('mouseover', function () {
-        // Đặt lại trạng thái của tất cả star trong container
-        resetStars(starsContainer);
-        // Highlight star đến vị trí được di chuột qua
-        highlightStars(stars, starIndex + 1);
-      });
+  tours.forEach(tour => {
+    const countryCard = document.createElement('div');
+    countryCard.classList.add('country__card');
 
-      // Bắt sự kiện khi di chuột ra khỏi star
-      star.addEventListener('mouseout', function () {
-        // Đặt lại trạng thái của tất cả star trong container
-        resetStars(starsContainer);
-        // Lấy đánh giá đã lưu từ Local Storage và highlight star tương ứng
-        const savedRating = getRatingFromLocalStorage(countryIndex);
-        if (savedRating) {
-          highlightStars(stars, savedRating);
-        }
-      });
+    const image = document.createElement('img');
+    image.src = tour.image; // Đặt đường dẫn ảnh từ dữ liệu tour
+    image.alt = 'country';
+
+    const countryName = document.createElement('div');
+    countryName.classList.add('country__name');
+    countryName.innerHTML = `
+      <i class="ri-map-pin-2-fill"></i>
+      <span>${tour.location}</span>
+      <div class="country__rating stars-right" >
+                <i class='bx bx-star' data-index="1"></i>
+                <i class='bx bx-star' data-index="2"></i>
+                <i class='bx bx-star' data-index="3"></i>
+                <i class='bx bx-star' data-index="4"></i>
+                <i class='bx bx-star' data-index="5"></i>
+              </div>
+    `;
+
+
+    countryCard.appendChild(image);
+    countryCard.appendChild(countryName);
+
+    journeyGrid.appendChild(countryCard);
+    
+    // Thêm sự kiện click cho mỗi ngôi sao
+
+const stars = countryCard.querySelectorAll(".bx-star");
+stars.forEach((star, index) => {
+  star.addEventListener("click", () => {
+    // Đánh dấu ngôi sao đã được click trước đó hay chưa
+    const isStarColored = star.classList.contains("star-colored");
+
+    // Xóa tất cả các lớp "star-colored" khỏi tất cả các ngôi sao
+    stars.forEach((s, i) => {
+      if (i <= index) {
+        s.classList.add("star-colored");
+      } else {
+        s.classList.remove("star-colored");
+      }
     });
+  });
+});
 
-    // save đánh giá từ Local Storage khi trang được tải
-    const savedRating = getRatingFromLocalStorage(countryIndex);
-    if (savedRating) {
-      highlightStars(stars, savedRating);
+// Hàm hiển thị đánh giá đã lưu từ local storage
+function displaySavedRating(location) {
+  const savedRating = getRatingFromLocalStorage(location);
+  const stars = countryCard.querySelectorAll(".bx-star");
+  stars.forEach((star, index) => {
+    if (index < savedRating) {
+      star.classList.add("star-colored");
+    } else {
+      star.classList.remove("star-colored");
     }
   });
-
-  // Hàm đặt lại trạng thái của tất cả star trong container
-  function resetStars(starsContainer) {
-    const stars = starsContainer.querySelectorAll('.bx-star');
-    stars.forEach(star => {
-      star.classList.remove('highlight');
-    });
   }
+  });
+}
 
-  // Hàm highlight star đến vị trí chỉ định
-  function highlightStars(stars, index) {
-    for (let i = 0; i < index; i++) {
-      stars[i].classList.add('highlight');
-    }
-  }
-
-  // Hàm save đánh giá vào Local Storage
-  function saveRatingToLocalStorage(countryIndex, rating) {
-    // Su dung mot key duy nhat cho moi countryIndex
-    const key = `userRating_${countryIndex}`;
-    localStorage.setItem(key, rating);
-  }
-
-  // Hàm lấy đánh giá từ Local Storage
-  function getRatingFromLocalStorage(countryIndex) {
-    // Sử dụng cùng một key duy nhất cho mỗi countryIndex
-    const key = `userRating_${countryIndex}`;
-    return localStorage.getItem(key);
-  }
-});
+// Gọi hàm fetchTourData() khi trang web được tải
+document.addEventListener('DOMContentLoaded', fetchTourData);
 
     </script>
   </body>

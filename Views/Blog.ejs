@@ -130,24 +130,32 @@
             data.forEach(function (blog) {
               // Tạo phần tử HTML cho mỗi blog
               var blogElement = `
-            <div class="post-box ${blog.category.toLowerCase()}">
-  <img src="${blog.cardImage}" alt="" class="post-img" />
-  
-  <!-- Thêm biểu tượng trái tim -->
-  <h2 class="category">${blog.category}</h2>
-  <a href="#" class="post-title">${blog.title}</a>
-  <span class="post-date">${new Date(blog.date).toLocaleDateString()}</span>
-  <p class="post-description">${blog.description}</p>
-  <div class="profile">
-    <img src="${blog.profileImage}" alt="" class="profile-img" />
-    <span class="profile-name">${blog.author}</span>
-    <span><i class="bx bx-heart post-like"></i></span>
-  </div>
-  
-</div>`;
+                <div class="post-box ${blog.category.toLowerCase()}">
+                  <img src="${blog.cardImage}" alt="" class="post-img" />
+                  <h2 class="category">${blog.category}</h2>
+                  <a href="#" class="post-title">${blog.title}</a>
+                  <span class="post-date">${new Date(
+                    blog.date
+                  ).toLocaleDateString()}</span>
+                  <p class="post-description">${blog.description}</p>
+                  <div class="profile">
+                    <img src="${
+                      blog.profileImage
+                    }" alt="" class="profile-img" />
+                    <span class="profile-name">${blog.author}</span>
+                    <span><i class="bx bx-heart post-like" data-id="${
+                      blog._id
+                    }"></i></span>
+                  </div>
+                </div>`;
 
               // Thêm blogElement vào phần container của bài đăng
               $(".post.container").append(blogElement);
+
+              // Check localStorage for liked posts
+              if (localStorage.getItem(blog._id) === "liked") {
+                $(`.post-like[data-id="${blog._id}"]`).addClass("post-liked");
+              }
             });
           },
           error: function (error) {
@@ -156,7 +164,6 @@
         });
 
         // Xử lý sự kiện khi người dùng click vào một filter-item
-
         $(".filter-item").click(function () {
           const filterValue = $(this).attr("data-filter").toLowerCase();
 
@@ -175,36 +182,37 @@
           }
         });
       });
-      // ---------
+
+      // Handle post title click to show modal
       $(".post").on("click", ".post-title", function () {
-        // Find post-box and get the image source
         const imageUrl = $(this)
           .closest(".post-box")
           .find(".post-img")
           .attr("src");
-
-        // Set the image source for the modal
         $("#modal-image").attr("src", imageUrl);
-
-        // Show the modal
         $("#image-modal").css("display", "block");
       });
 
-      // Đóng modal khi người dùng click vào nút đóng
+      // Close modal
       $(".close").click(function () {
         $("#image-modal").css("display", "none");
       });
 
-      // Đóng modal khi người dùng click ra ngoài modal
       $(window).click(function (event) {
         if (event.target.id === "image-modal") {
           $("#image-modal").css("display", "none");
         }
       });
-      // Xử lý sự kiện click cho trái tim
+
+      // Handle like button click
       $(".post").on("click", ".post-like", function () {
-        // Toggle class để thay đổi màu sắc của trái tim và kích hoạt animation
+        const postId = $(this).attr("data-id");
         $(this).toggleClass("post-liked");
+        if ($(this).hasClass("post-liked")) {
+          localStorage.setItem(postId, "liked");
+        } else {
+          localStorage.removeItem(postId);
+        }
       });
     </script>
   </body>

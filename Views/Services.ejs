@@ -22,30 +22,48 @@
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-      integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+      .box:hover {
+        transform: scale(1.05);
+        transition: transform 0.3s ease-in-out;
+      }
+      .box .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+      }
+      .box .icon i {
+        transition: color 0.3s ease;
+      }
+      .box .icon:hover i {
+        color: #007bff;
+      }
+      .box .title a {
+        text-decoration: none;
+        color: #333;
+        transition: color 0.3s ease;
+      }
+      .box .title a:hover {
+        color: #007bff;
+      }
+      .box .description {
+        color: #555;
+      }
+    </style>
   </head>
   <body>
     <section class="services section-bg" id="services">
       <div class="container">
         <header class="section-header">
           <h3>Services</h3>
-
           <p>
             Embark on Unforgettable Journeys with Our Exceptional Travel
             Services - Where Every Adventure Tells a Unique Tale of Exploration
             and Discovery
           </p>
         </header>
-
         <div class="row">
           <div class="col-md-6 col-lg-4">
             <div class="box">
@@ -55,16 +73,13 @@
                   style="color: gray; font-size: 50px"
                 ></i>
               </div>
-
-              <h4 class="title"><a href="">Facebook</a></h4>
-
+              <h4 class="title"><a href="javascript:void(0)">Facebook</a></h4>
               <p class="description">
                 Wanderlust Adventures: Your Gateway to Exciting Journeys! Follow
                 us for travel inspiration, exclusive deals, and more.
               </p>
             </div>
           </div>
-
           <div class="col-md-6 col-lg-4">
             <div class="box">
               <div class="icon">
@@ -73,9 +88,7 @@
                   style="color: gray; font-size: 50px"
                 ></i>
               </div>
-
-              <h4 class="title"><a href="">Tiktok</a></h4>
-
+              <h4 class="title"><a href="javascript:void(0)">Tiktok</a></h4>
               <p class="description">
                 Explore the World: Dive into our TikTok for an immersive journey
                 through stunning destinations, travel hacks, and
@@ -83,7 +96,6 @@
               </p>
             </div>
           </div>
-
           <div class="col-md-6 col-lg-4">
             <div class="box">
               <div class="icon">
@@ -92,16 +104,13 @@
                   style="color: gray; font-size: 50px"
                 ></i>
               </div>
-
-              <h4 class="title"><a href="">Github</a></h4>
-
+              <h4 class="title"><a href="javascript:void(0)">Github</a></h4>
               <p class="description">
                 Code the Adventure: GitHub Hub for Travel Tech Enthusiasts!
                 Explore, Contribute, and Transform the Way We Travel.
               </p>
             </div>
           </div>
-
           <div class="col-md-6 col-lg-4">
             <div class="box">
               <div class="icon">
@@ -110,9 +119,7 @@
                   style="color: gray; font-size: 50px"
                 ></i>
               </div>
-
-              <h4 class="title"><a href="">Instagram</a></h4>
-
+              <h4 class="title"><a href="javascript:void(0)">Instagram</a></h4>
               <p class="description">
                 Wander With Us: Dive into the beauty of travel through our lens.
                 Follow for travel inspiration, stunning destinations, and
@@ -120,7 +127,6 @@
               </p>
             </div>
           </div>
-
           <div class="col-md-6 col-lg-4">
             <div class="box">
               <div class="icon">
@@ -129,9 +135,7 @@
                   style="color: gray; font-size: 50px"
                 ></i>
               </div>
-
-              <h4 class="title"><a href="">Gmail</a></h4>
-
+              <h4 class="title"><a href="javascript:void(0)">Gmail</a></h4>
               <p class="description">
                 Dream Destinations at Your Fingertips! Explore Our Latest Travel
                 Deals . Your Next Adventure Awaits! Exclusive Travel Offers
@@ -139,7 +143,6 @@
               </p>
             </div>
           </div>
-
           <div class="col-md-6 col-lg-4">
             <div class="box">
               <div class="icon">
@@ -148,9 +151,7 @@
                   style="color: gray; font-size: 50px"
                 ></i>
               </div>
-
-              <h4 class="title"><a href="">Twitter</a></h4>
-
+              <h4 class="title"><a href="javascript:void(0)">Twitter</a></h4>
               <p class="description">
                 Embark on Epic Journeys: Follow us for daily travel inspiration,
                 exclusive deals, and wanderlust-inducing moments!
@@ -160,5 +161,69 @@
         </div>
       </div>
     </section>
+
+    <div
+      class="modal fade"
+      id="qrModal"
+      tabindex="-1"
+      aria-labelledby="qrModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="qrModalLabel">Scan QR Code</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" style="margin: 0 auto">
+            <div id="qrcode"></div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".box .icon").click(function () {
+          const urlMap = {
+            facebook: "https://www.facebook.com",
+            tiktok: "https://www.tiktok.com",
+            github: "https://www.github.com",
+            instagram: "https://www.instagram.com",
+            gmail: "mailto:your-email@example.com",
+            twitter: "https://www.twitter.com",
+          };
+          const platform = $(this)
+            .find("i")
+            .attr("class")
+            .split(" ")[1]
+            .split("-")[1]; // Extract platform name
+          const url = urlMap[platform];
+
+          if (url) {
+            $("#qrcode").empty(); // Clear any previous QR code
+            new QRCode(document.getElementById("qrcode"), url); // Generate new QR code
+
+            // Show the modal
+            $("#qrModal").modal("show");
+          }
+        });
+      });
+    </script>
   </body>
 </html>

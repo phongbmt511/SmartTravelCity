@@ -121,7 +121,9 @@
                   .attr("alt", "");
                 const category = $("<h2>")
                   .addClass("category")
-                  .html(`<i class="bx bxs-map bx-xs">${tour.location}</i>`);
+                  .html(
+                    `<i class="bx bxs-map bx-xs"><span>${tour.location}</span></i>`
+                  );
                 const title = $("<a>")
                   .attr("href", "#")
                   .addClass("post-title")
@@ -139,6 +141,11 @@
                 postBox.append(img, category, title, description, cardBtn);
                 postContainer.append(postBox);
               });
+
+              // Kiểm tra nếu số lượng tours trả về ít hơn limit thì ẩn nút
+              if (data.length < limit) {
+                $("#loadMoreTours").hide();
+              }
             },
             error: function (error) {
               console.error("Error loading tours:", error);

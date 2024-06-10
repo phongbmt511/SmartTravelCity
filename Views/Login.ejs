@@ -53,7 +53,7 @@
         })
           .then((response) => {
             if (response.status === 200) {
-              alert("Login thành công");
+              alert("Logged in successfully");
               // chuyen toi page home khi dang nhap thanh cong
               window.location.href = "/home";
             } else if (response.status === 401) {

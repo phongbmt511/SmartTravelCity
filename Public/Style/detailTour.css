@@ -7,7 +7,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* font-family: "Roboto Slab", serif; */
 }
 body {
   background-color: #e8f1fa;
@@ -65,7 +64,6 @@ body {
   text-align: justify;
   overflow-wrap: break-word;
   font-family: "Open Sans";
-
   color: gray;
 }
 /* -------------footer ----------------------------*/
