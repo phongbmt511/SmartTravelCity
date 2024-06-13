@@ -307,93 +307,99 @@
   
 // render giao diện
 // Hàm gửi yêu cầu AJAX đến endpoint API và xử lý dữ liệu nhận được
-function fetchTourData() {
-  fetch('/api/tours')
-    .then(response => response.json())
-    .then(data => {
-      // Lấy ngẫu nhiên 6 tour từ danh sách dữ liệu nhận được
-      const randomTours = getRandomElements(data, 6);
-      // Hiển thị ảnh của các tour ngẫu nhiên trên trang web
-      displayTourImages(randomTours);
-    })
-    .catch(error => console.error('Error fetching tour data:', error));
-}
-
-// Hàm chọn ngẫu nhiên 'count' phần tử từ một mảng
-function getRandomElements(arr, count) {
-  const shuffled = arr.sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, count);
-}
-
-// Hàm hiển thị ảnh của các tour trên trang web
-function displayTourImages(tours) {
-  const journeyGrid = document.querySelector('.journey__grid');
-  journeyGrid.innerHTML = ''; // Xóa nội dung cũ
-
-  tours.forEach(tour => {
-    const countryCard = document.createElement('div');
-    countryCard.classList.add('country__card');
-
-    const image = document.createElement('img');
-    image.src = tour.image; // Đặt đường dẫn ảnh từ dữ liệu tour
-    image.alt = 'country';
-
-    const countryName = document.createElement('div');
-    countryName.classList.add('country__name');
-    countryName.innerHTML = `
-      <i class="ri-map-pin-2-fill"></i>
-      <span>${tour.location}</span>
-      <div class="country__rating stars-right" >
-                <i class='bx bx-star' data-index="1"></i>
-                <i class='bx bx-star' data-index="2"></i>
-                <i class='bx bx-star' data-index="3"></i>
-                <i class='bx bx-star' data-index="4"></i>
-                <i class='bx bx-star' data-index="5"></i>
-              </div>
-    `;
-
-
-    countryCard.appendChild(image);
-    countryCard.appendChild(countryName);
-
-    journeyGrid.appendChild(countryCard);
-    
-    // Thêm sự kiện click cho mỗi ngôi sao
-
-const stars = countryCard.querySelectorAll(".bx-star");
-stars.forEach((star, index) => {
-  star.addEventListener("click", () => {
-    // Đánh dấu ngôi sao đã được click trước đó hay chưa
-    const isStarColored = star.classList.contains("star-colored");
-
-    // Xóa tất cả các lớp "star-colored" khỏi tất cả các ngôi sao
-    stars.forEach((s, i) => {
-      if (i <= index) {
-        s.classList.add("star-colored");
-      } else {
-        s.classList.remove("star-colored");
+      function fetchTourData() {
+        fetch('/api/tours')
+          .then(response => response.json())
+          .then(data => {
+            // Lấy ngẫu nhiên 6 tour từ danh sách dữ liệu nhận được
+            const randomTours = getRandomElements(data, 6);
+            // Hiển thị ảnh của các tour ngẫu nhiên trên trang web
+            displayTourImages(randomTours);
+          })
+          .catch(error => console.error('Error fetching tour data:', error));
       }
-    });
-  });
-});
 
-// Hàm hiển thị đánh giá đã lưu từ local storage
-function displaySavedRating(location) {
-  const savedRating = getRatingFromLocalStorage(location);
-  const stars = countryCard.querySelectorAll(".bx-star");
-  stars.forEach((star, index) => {
-    if (index < savedRating) {
-      star.classList.add("star-colored");
-    } else {
-      star.classList.remove("star-colored");
-    }
-  });
-  }
-  });
-}
+      // Hàm chọn ngẫu nhiên 'count' phần tử từ một mảng
+      function getRandomElements(arr, count) {
+        const shuffled = arr.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+      }
 
-// Gọi hàm fetchTourData() khi trang web được tải
-document.addEventListener('DOMContentLoaded', fetchTourData);
+      // Hàm lưu đánh giá vào local storage
+      function saveRatingToLocalStorage(location, rating) {
+        localStorage.setItem(location, rating);
+      }
+
+      // Hàm lấy đánh giá từ local storage
+      function getRatingFromLocalStorage(location) {
+        return localStorage.getItem(location);
+      }
+
+      // Hàm hiển thị ảnh của các tour trên trang web
+      function displayTourImages(tours) {
+        const journeyGrid = document.querySelector('.journey__grid');
+        journeyGrid.innerHTML = ''; // Xóa nội dung cũ
+
+        tours.forEach(tour => {
+          const countryCard = document.createElement('div');
+          countryCard.classList.add('country__card');
+
+          const image = document.createElement('img');
+          image.src = tour.image; // Đặt đường dẫn ảnh từ dữ liệu tour
+          image.alt = 'country';
+
+          const countryName = document.createElement('div');
+          countryName.classList.add('country__name');
+          countryName.innerHTML = `
+            <i class="ri-map-pin-2-fill"></i>
+            <span>${tour.location}</span>
+            <div class="country__rating stars-right">
+              <i class='bx bx-star' data-index="1"></i>
+              <i class='bx bx-star' data-index="2"></i>
+              <i class='bx bx-star' data-index="3"></i>
+              <i class='bx bx-star' data-index="4"></i>
+              <i class='bx bx-star' data-index="5"></i>
+            </div>
+          `;
+
+          countryCard.appendChild(image);
+          countryCard.appendChild(countryName);
+          journeyGrid.appendChild(countryCard);
+
+          // Thêm sự kiện click cho mỗi ngôi sao
+          const stars = countryCard.querySelectorAll(".bx-star");
+          stars.forEach((star, index) => {
+            star.addEventListener("click", () => {
+              // Đánh dấu ngôi sao đã được click trước đó hay chưa
+              const rating = index + 1;
+              // Lưu đánh giá vào local storage
+              saveRatingToLocalStorage(tour.location, rating);
+              // Hiển thị đánh giá
+              displaySavedRating(tour.location, stars);
+            });
+          });
+
+          // Hiển thị đánh giá đã lưu từ local storage
+          displaySavedRating(tour.location, stars);
+        });
+      }
+
+      // Hàm hiển thị đánh giá đã lưu từ local storage
+      function displaySavedRating(location, stars) {
+        const savedRating = getRatingFromLocalStorage(location);
+        if (savedRating) {
+          stars.forEach((star, index) => {
+            if (index < savedRating) {
+              star.classList.add("star-colored");
+            } else {
+              star.classList.remove("star-colored");
+            }
+          });
+        }
+      }
+
+      // Gọi hàm fetchTourData() khi trang web được tải
+      document.addEventListener('DOMContentLoaded', fetchTourData);
 
     </script>
   </body>

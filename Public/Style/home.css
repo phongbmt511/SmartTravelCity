@@ -664,3 +664,17 @@ body.cold #weather {
   display: flex;
   margin-left: 120px;
 }
+
+.country__rating {
+  display: flex;
+  position: absolute;
+  right: 0;
+}
+.country__card {
+  position: relative;
+  width: 100%;
+}
+.bx-star {
+  margin-left: 2px;
+  cursor: pointer;
+}
